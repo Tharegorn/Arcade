@@ -12,8 +12,6 @@
 
 class IGraphicLib {
     public:
-        IGraphicLib();
-        ~IGraphicLib();
         virtual int getKey();
         virtual void printText(int x, int y, std::string text);
         virtual void refresh();

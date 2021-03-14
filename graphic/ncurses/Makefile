@@ -18,7 +18,7 @@ NAME	=   arcade_ncurses.so
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc $(OBJ) -o $(NAME) -shared -fPIC -lncurses
+	g++ $(OBJ) -o $(NAME) -shared -fPIC -lncurses
 	mv $(NAME) ../../lib/
 
 clean:

@@ -7,6 +7,8 @@
 
 #include <ncurses.h>
 #include "../../include/IGraphicLib.hpp"
+#include <iostream>
+#include <string>
 
 #pragma once
 
@@ -18,6 +20,7 @@ class ncurse: public IGraphicLib
         int getKey();
         void printText(int x, int y, std::string text);
         void refresh();
+        void printbox(int x, int y, int h, int w);
     private:
         WINDOW *win;
 };

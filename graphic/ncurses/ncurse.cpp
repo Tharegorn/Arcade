@@ -34,6 +34,15 @@ void ncurse::refresh()
     wrefresh(win);
 }
 
+void ncurse::printbox(int x, int y, int h, int w)
+{
+    WINDOW *t = subwin(win, y, x, h, w);
+    box(t, ACS_VLINE, ACS_HLINE);
+    touchwin(t);
+    wrefresh(t);
+    wrefresh(win);
+}
+
 extern "C" {
     void *Launch() {
         // ncurse *a = 
