@@ -8,11 +8,13 @@
 #include "../include/Core.hpp"
 #include "../include/Library.hpp"
 
+typedef void *(*function)();
 
 Core::Core(std::string path)
 {
     int ite = 0;
     bool current = false;
+
     check_files();
     for (const auto& x : libraries) {
         Listlib.push_back(new Library(x.second));
@@ -26,6 +28,7 @@ Core::Core(std::string path)
     }
     if (!current) {
         Listlib.push_back(new Library(path));
+        curr = Listlib.size() - 1;
     }
 }
 
@@ -50,15 +53,37 @@ void Core::check_files()
     for (auto i : files){
         t++;
         std::string str(i);
-        if (str.find(".so") && str.find("lib_arcade_"))
+        if (str.find(".so") && str.find("arcade_"))
             files.erase(files.begin() + t - 1);
     }
     for (auto i : files) {
         std::string str(i);
         auto name = str;
-        name.erase(0, 11);
+        name.erase(0, 7);
         name.erase(name.length() - 3, 3);
-        libraries[name] = "./lib/" + str;
+        libraries[name] = "lib/" + str;
     }
 
+}
+
+void Core::LibLoader()
+{
+    function lib;
+    char *err;
+
+    lib = (function) dlsym(Listlib[curr]->get_open(), "Launch");
+    if ((err = dlerror()) != nullptr) {
+        std::cerr << err << std::endl;
+        exit(84);
+    }
+    GraphicLib = static_cast<IGraphicLib *>(lib());
+
+}
+
+void Core::init()
+{
+    while (1) {
+        GraphicLib->printText(10, 10, "Bite");
+        GraphicLib->refresh();
+    }
 }

@@ -5,15 +5,15 @@
 ** main
 */
 
-#include "../include/Core.hpp"
-#include "../include/Library.hpp"
+#include "Core.hpp"
+#include "Library.hpp"
 #include <dlfcn.h>
 
 
 Library::Library(std::string file)
 {
-    char * err;
-
+    char *err;
+    std::cout << file << std::endl;
     open = dlopen(file.c_str(), RTLD_LAZY);
     if ((err = dlerror()) != nullptr) {
         std::cerr << err << std::endl;
@@ -28,6 +28,11 @@ Library::~Library()
     dlclose(open);
 }
 
+void *Library::get_open()
+{
+    return open;
+}
+
 
 int main( int ac, char **av)
 {
@@ -37,5 +42,6 @@ int main( int ac, char **av)
         return -1;
     }
     Core *test = new Core(av[1]);
-    std::cout << test->EXIT << std::endl;
+    test->init();
+    return (0);
 }

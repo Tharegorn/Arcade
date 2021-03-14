@@ -15,7 +15,7 @@ class Library {
     public:
         explicit Library(std::string);
         ~Library();
-        void *error_handl();
+        void *get_open();
 
     protected:
     private:

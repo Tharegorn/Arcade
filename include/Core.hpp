@@ -16,6 +16,7 @@
 #include <string.h>
 #include <map>
 #include "Library.hpp"
+#include "IGraphicLib.hpp"
 
 class Core
 {
@@ -23,6 +24,8 @@ class Core
         explicit Core(std::string);
         ~Core();
         void check_files();
+        void LibLoader();
+        void init();
 
     enum keys {
         PREVIOUS_LIB = 'p',
@@ -38,5 +41,6 @@ class Core
         std::vector<char *> files;
         std::map<std::string, std::string> libraries;
         std::vector<Library *> Listlib;
+        IGraphicLib *GraphicLib;
 };
 #endif /* !ARCADE_HPP_ */
