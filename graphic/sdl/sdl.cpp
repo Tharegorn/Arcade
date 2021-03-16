@@ -41,6 +41,21 @@ void sdl::clearwin()
 
 void sdl::printText(int x, int y, std::string text)
 {
+
+    SDL_Color White = {255, 255, 255};
+
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, text.c_str(), White); 
+
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(rend, surfaceMessage);
+
+    SDL_Rect Message_rect;
+    Message_rect.x = x; 
+    Message_rect.y = y;
+    Message_rect.w = 100;
+    Message_rect.h = 100;
+    SDL_RenderCopy(rend, Message, NULL, &Message_rect);
+    SDL_FreeSurface(surfaceMessage);
+    SDL_DestroyTexture(Message);
 }
 
 void sdl::refresh()

@@ -87,7 +87,7 @@ void Core::init()
     while (1) {
         GraphicLib->clearwin();
        // GraphicLib->printbox(13, 10, 1, 1);
-        //GraphicLib->printText(0, 2, "Libraries");
+        GraphicLib->printText(0, 2, "Libraries");
         //for (const auto& x : libraries) {
         //    GraphicLib->printText(i,4, x.first);
         //    if (i - 2 == curr)
