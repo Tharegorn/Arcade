@@ -14,7 +14,8 @@ class sdl: IGraphicLib
 {
     public:
         sdl();
-        ~sdl();
+        ~sdl() override;
+        void clearwin();
         int getKey();
         void printText(int x, int y, std::string text);
         void refresh();

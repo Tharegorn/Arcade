@@ -17,8 +17,9 @@ class ncurse: IGraphicLib
 {
     public:
         ncurse();
-        ~ncurse();
+        ~ncurse() override;
         int getKey();
+        void clearwin();
         void printText(int x, int y, std::string text);
         void refresh();
         void printbox(int x, int y, int h, int w);

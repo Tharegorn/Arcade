@@ -39,6 +39,7 @@ class Core
     };
     private:
         int curr;
+        int maxlib;
         std::vector<char *> files;
         std::map<std::string, std::string> libraries;
         std::vector<Library *> Listlib;

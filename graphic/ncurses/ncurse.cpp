@@ -24,6 +24,11 @@ int ncurse::getKey()
     return (getch());
 }
 
+void ncurse::clearwin()
+{
+    wclear(win);
+}
+
 void ncurse::printText(int x, int y, std::string text)
 {
     mvprintw(x, y, text.c_str());

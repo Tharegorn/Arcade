@@ -25,6 +25,7 @@ Core::Core(std::string path)
         }
         ite++;
     }
+    maxlib = ite - 1;
     if (!current) {
         Listlib.push_back(new Library(path));
         curr = Listlib.size() - 1;
@@ -84,10 +85,13 @@ void Core::init()
 {
     int i = 2;
     while (1) {
-        GraphicLib->printbox(12, 10, 1, 1);
+        GraphicLib->clearwin();
+        GraphicLib->printbox(13, 10, 1, 1);
         GraphicLib->printText(0, 2, "Libraries");
         for (const auto& x : libraries) {
-            GraphicLib->printText(i,2, x.first);
+            GraphicLib->printText(i,4, x.first);
+            if (i - 2 == curr)
+                GraphicLib->printText(i, 2, ">");
             i++;
         }
         i = 2;
@@ -103,9 +107,24 @@ void Core::init()
         GraphicLib->printbox(12, 10, 1, 65);
         GraphicLib->printText(0, 67, "Path");
         GraphicLib->refresh();
+        keys(GraphicLib->getKey());
     }
 }
 
 void Core::keys(int key)
 {
+    delete(GraphicLib);
+    if (key == NEXT_LIB) {
+        if ((size_t)curr + 1 < Listlib.size())
+            curr++;
+        else
+            curr = 0;
+    }
+    if (key == PREVIOUS_LIB) {
+        if (curr - 1 >= 0)
+            curr--;
+        else
+            curr = (int)Listlib.size();
+    }
+    this->LibLoader();
 }

@@ -12,6 +12,8 @@
 
 class IGraphicLib {
     public:
+        virtual ~IGraphicLib() = default;
+        virtual void clearwin() = 0;
         virtual int getKey() = 0;
         virtual void printText(int x, int y, std::string text) = 0;
         virtual void refresh() = 0;

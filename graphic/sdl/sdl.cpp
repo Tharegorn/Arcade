@@ -31,6 +31,11 @@ int sdl::getKey()
     return 0;
 }
 
+void sdl::clearwin()
+{
+    
+}
+
 void sdl::printText(int x, int y, std::string text)
 {
 }

@@ -37,10 +37,11 @@ int main( int ac, char **av)
 {
     if (ac != 2) {
         std::cerr << "ERROR: Invalid number of arguments" << std::endl;
-        std::cout << "USAGE : ./arcade ./lib/lib_arcade.so" << std::endl;
+        std::cout << "USAGE : ./arcade lib/lib_arcade.so" << std::endl;
         return -1;
     }
     Core *test = new Core(av[1]);
+    std::cout << test->EXIT << std::endl;
     test->init();
     return (0);
 }
