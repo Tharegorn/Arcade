@@ -14,7 +14,6 @@ Core::Core(std::string path)
 {
     int ite = 0;
     bool current = false;
-
     check_files();
     for (const auto& x : libraries) {
         Listlib.push_back(new Library(x.second));
@@ -30,6 +29,7 @@ Core::Core(std::string path)
         Listlib.push_back(new Library(path));
         curr = Listlib.size() - 1;
     }
+    LibLoader();
 }
 
 Core::~Core()
@@ -61,9 +61,9 @@ void Core::check_files()
         auto name = str;
         name.erase(0, 7);
         name.erase(name.length() - 3, 3);
-        libraries[name] = "lib/" + str;
+        std::cout << name << ":" << str << std::endl;
+        libraries[name.c_str()] = "lib/" + str;
     }
-
 }
 
 void Core::LibLoader()
@@ -83,7 +83,23 @@ void Core::LibLoader()
 void Core::init()
 {
     while (1) {
-        GraphicLib->printText(10, 10, "Bite");
+        // GraphicLib->printbox(40, 25, 20, 13);
+        // GraphicLib->printText(23, 37, "PACMAN");
+        // GraphicLib->printText(25, 32, "PRESS L TO START");
+        // GraphicLib->printbox(40, 25, 90, 13);
+        // GraphicLib->printText(23, 108, "SNAKE");
+        // GraphicLib->printText(25, 103, "PRESS M TO START");
+        // GraphicLib->printbox(30, 15, 140, 4);
+        // GraphicLib->printbox(30, 15, 140, 27);
+        // GraphicLib->printText(5, 152, "Games");
+        // GraphicLib->printText(28, 152, "Gfx Lib");
+        // GraphicLib->printText(40, 61, "PRESS N TO SWITCH TO NEXT LIB");
+        // GraphicLib->printText(42, 61, "PRESS P TO SWITCH TO PREV LIB");
         GraphicLib->refresh();
     }
+}
+
+void Core::keys(int key)
+{
+    key++;
 }

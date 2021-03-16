@@ -45,7 +45,6 @@ void ncurse::printbox(int x, int y, int h, int w)
 
 extern "C" {
     void *Launch() {
-        // ncurse *a = 
         return(new ncurse());
     }
 }

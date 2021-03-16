@@ -12,9 +12,10 @@
 
 class IGraphicLib {
     public:
-        virtual int getKey();
-        virtual void printText(int x, int y, std::string text);
-        virtual void refresh();
+        virtual int getKey() = 0;
+        virtual void printText(int x, int y, std::string text) = 0;
+        virtual void refresh() = 0;
+        virtual void printbox(int x, int y, int h, int w) = 0;
 
 
     protected:

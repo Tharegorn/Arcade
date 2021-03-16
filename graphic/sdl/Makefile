@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SRC     =   ncurse.cpp
+SRC     =   sdl.cpp
 
 CFLAGS	+=	-fPIC -Wextra -Wall -Werror
 
@@ -13,12 +13,12 @@ CFLAGS	+=	-I ../../include/ -I ./
 
 OBJ     =	$(SRC:.c=.o)
 
-NAME	=   arcade_ncurses.so
+NAME	=   arcade_sdl.so
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc $(OBJ) -o $(NAME) -shared -fPIC -lncurses
+	gcc $(OBJ) -o $(NAME) -shared -fPIC -lSDL2
 	mv $(NAME) ../../lib/
 
 clean:

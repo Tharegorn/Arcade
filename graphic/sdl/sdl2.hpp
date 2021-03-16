@@ -2,28 +2,23 @@
 ** EPITECH PROJECT, 2021
 ** B-OOP-400-LYN-4-1-arcade-romain.bouguet [WSL: Ubuntu-20.04]
 ** File description:
-** ncurse
+** sdl
 */
 
-#ifndef ncurses
-#define ncurses
+#pragma once
 
-#include <ncurses.h>
 #include "../../include/IGraphicLib.hpp"
-#include <iostream>
-#include <string>
+#include <SDL2/SDL.h>
 
-class ncurse: IGraphicLib
+class sdl: IGraphicLib
 {
     public:
-        ncurse();
-        ~ncurse();
+        sdl();
+        ~sdl();
         int getKey();
         void printText(int x, int y, std::string text);
         void refresh();
         void printbox(int x, int y, int h, int w);
     private:
-        WINDOW *win;
+        SDL_Window *win;
 };
-
-#endif

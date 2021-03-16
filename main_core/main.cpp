@@ -13,7 +13,6 @@
 Library::Library(std::string file)
 {
     char *err;
-    std::cout << file << std::endl;
     open = dlopen(file.c_str(), RTLD_LAZY);
     if ((err = dlerror()) != nullptr) {
         std::cerr << err << std::endl;
