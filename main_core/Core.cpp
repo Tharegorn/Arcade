@@ -83,31 +83,31 @@ void Core::LibLoader()
 
 void Core::init()
 {
-    int i = 2;
+    //int i = 2;
     while (1) {
         GraphicLib->clearwin();
-        GraphicLib->printbox(13, 10, 1, 1);
-        GraphicLib->printText(0, 2, "Libraries");
-        for (const auto& x : libraries) {
-            GraphicLib->printText(i,4, x.first);
-            if (i - 2 == curr)
-                GraphicLib->printText(i, 2, ">");
-            i++;
-        }
-        i = 2;
-        GraphicLib->printbox(25, 10, 1, 15);
-        GraphicLib->printText(0, 18, "Path");
-        for (const auto& x : libraries) {
-            GraphicLib->printText(i,16, x.second);
-            i++;
-        }
-        i = 2;
-        GraphicLib->printbox(12, 10, 1, 50);
-        GraphicLib->printText(0, 52, "Games");
-        GraphicLib->printbox(12, 10, 1, 65);
-        GraphicLib->printText(0, 67, "Path");
+       // GraphicLib->printbox(13, 10, 1, 1);
+        //GraphicLib->printText(0, 2, "Libraries");
+        //for (const auto& x : libraries) {
+        //    GraphicLib->printText(i,4, x.first);
+        //    if (i - 2 == curr)
+        //        GraphicLib->printText(i, 2, ">");
+        //    i++;
+        //}
+      //  i = 2;
+       // GraphicLib->printbox(25, 10, 1, 15);
+       // GraphicLib->printText(0, 18, "Path");
+       // for (const auto& x : libraries) {
+       //     GraphicLib->printText(i,16, x.second);
+       //     i++;
+       // }
+       // i = 2;
+       // GraphicLib->printbox(12, 10, 1, 50);
+       // GraphicLib->printText(0, 52, "Games");
+       // GraphicLib->printbox(12, 10, 1, 65);
+       // GraphicLib->printText(0, 67, "Path");
         GraphicLib->refresh();
-        keys(GraphicLib->getKey());
+       // keys(GraphicLib->getKey());
     }
 }
 

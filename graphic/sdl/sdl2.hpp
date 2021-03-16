@@ -9,6 +9,7 @@
 
 #include "../../include/IGraphicLib.hpp"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 class sdl: IGraphicLib
 {
@@ -23,4 +24,5 @@ class sdl: IGraphicLib
     private:
         SDL_Window *win;
         SDL_Renderer *rend;
+        TTF_Font *font;
 };

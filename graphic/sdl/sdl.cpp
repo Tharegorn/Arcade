@@ -17,11 +17,13 @@ sdl::sdl()
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		800, 600, SDL_WINDOW_SHOWN);
     rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
+    font = TTF_OpenFont("../../assets/ARCADE.ttf", 2000);
     SDL_Delay(3000);
 }
 
 sdl::~sdl()
 {
+    TTF_CloseFont(font);
     SDL_DestroyWindow(win);
     SDL_Quit();
 }
@@ -33,7 +35,8 @@ int sdl::getKey()
 
 void sdl::clearwin()
 {
-    
+    SDL_SetRenderDrawColor(rend, 100, 0, 0, 255);
+	SDL_RenderClear(rend);
 }
 
 void sdl::printText(int x, int y, std::string text)
@@ -42,6 +45,7 @@ void sdl::printText(int x, int y, std::string text)
 
 void sdl::refresh()
 {
+    SDL_RenderPresent(rend);
 }
 
 void sdl::printbox(int x, int y, int h, int w)
