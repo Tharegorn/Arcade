@@ -62,7 +62,7 @@ void Core::check_files()
         name.erase(0, 7);
         name.erase(name.length() - 3, 3);
         std::cout << name << ":" << str << std::endl;
-        libraries[name.c_str()] = "lib/" + str;
+        libraries[name] = "lib/" + str;
     }
 }
 
@@ -82,12 +82,30 @@ void Core::LibLoader()
 
 void Core::init()
 {
+    int i = 2;
     while (1) {
+        GraphicLib->printbox(12, 10, 1, 1);
+        GraphicLib->printText(0, 2, "Libraries");
+        for (const auto& x : libraries) {
+            GraphicLib->printText(i,2, x.first);
+            i++;
+        }
+        i = 2;
+        GraphicLib->printbox(25, 10, 1, 15);
+        GraphicLib->printText(0, 18, "Path");
+        for (const auto& x : libraries) {
+            GraphicLib->printText(i,16, x.second);
+            i++;
+        }
+        i = 2;
+        GraphicLib->printbox(12, 10, 1, 50);
+        GraphicLib->printText(0, 52, "Games");
+        GraphicLib->printbox(12, 10, 1, 65);
+        GraphicLib->printText(0, 67, "Path");
         GraphicLib->refresh();
     }
 }
 
 void Core::keys(int key)
 {
-    key++;
 }

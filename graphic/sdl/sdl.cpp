@@ -16,6 +16,7 @@ sdl::sdl()
 	win = SDL_CreateWindow("Arcade - SDL",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		800, 600, SDL_WINDOW_SHOWN);
+    rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
     SDL_Delay(3000);
 }
 

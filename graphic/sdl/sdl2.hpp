@@ -21,4 +21,5 @@ class sdl: IGraphicLib
         void printbox(int x, int y, int h, int w);
     private:
         SDL_Window *win;
+        SDL_Renderer *rend;
 };
