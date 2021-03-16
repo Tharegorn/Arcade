@@ -9,16 +9,21 @@
 
 sdl::sdl()
 {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cerr << "SDL initialization failed." << std::endl;
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		exit(EXIT_FAILURE);
-	}
+    if (TTF_Init() != 0)
+		exit(EXIT_FAILURE);
+    IMG_Init(IMG_INIT_PNG);
 	win = SDL_CreateWindow("Arcade - SDL",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		800, 600, SDL_WINDOW_SHOWN);
-    rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-    font = TTF_OpenFont("../../assets/ARCADE.ttf", 2000);
-    SDL_Delay(3000);
+		1920, 1080, SDL_WINDOW_SHOWN);
+	//SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
+    rend = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
+    font = TTF_OpenFont("assets/ARCADE.TTF", 50);
+    back = IMG_LoadTexture(rend,
+		"assets/test.png");
+    SDL_RenderPresent(rend);
+
 }
 
 sdl::~sdl()
@@ -35,25 +40,24 @@ int sdl::getKey()
 
 void sdl::clearwin()
 {
-    SDL_SetRenderDrawColor(rend, 100, 0, 0, 255);
+    SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
 	SDL_RenderClear(rend);
 }
 
 void sdl::printText(int x, int y, std::string text)
 {
-
-    SDL_Color White = {255, 255, 255};
+    SDL_Color White = {100, 255, 255, 255};
 
     SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, text.c_str(), White); 
 
     SDL_Texture* Message = SDL_CreateTextureFromSurface(rend, surfaceMessage);
 
     SDL_Rect Message_rect;
-    Message_rect.x = x; 
-    Message_rect.y = y;
-    Message_rect.w = 100;
-    Message_rect.h = 100;
-    SDL_RenderCopy(rend, Message, NULL, &Message_rect);
+    Message_rect.y = y * 15;
+    Message_rect.x = x * 15;
+    Message_rect.w = text.length() * 10;
+    Message_rect.h = 24;
+    SDL_RenderCopy(rend, Message, &Message_rect, &Message_rect);
     SDL_FreeSurface(surfaceMessage);
     SDL_DestroyTexture(Message);
 }

@@ -18,7 +18,7 @@ NAME	=   arcade_sdl.so
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	g++ $(OBJ) -o $(NAME) -shared -fPIC -lSDL2 -lSDL2_ttf
+	g++ $(OBJ) -o $(NAME) -shared -fPIC -lSDL2 -lSDL2_ttf -lSDL2_image
 	mv $(NAME) ../../lib/
 
 clean:

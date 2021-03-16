@@ -84,10 +84,15 @@ void Core::LibLoader()
 void Core::init()
 {
     //int i = 2;
+        //GraphicLib->clearwin();
     while (1) {
-        GraphicLib->clearwin();
        // GraphicLib->printbox(13, 10, 1, 1);
-        GraphicLib->printText(0, 2, "Libraries");
+        GraphicLib->printText(15, 15, "Libraries");
+        GraphicLib->printText(16, 15, "Libraries");
+        GraphicLib->printText(17, 15, "Libraries");
+        GraphicLib->printText(18, 15, "Libraries");
+        GraphicLib->printText(19, 15, "Libraries");
+        GraphicLib->printText(120, 15, "Libraries");
         //for (const auto& x : libraries) {
         //    GraphicLib->printText(i,4, x.first);
         //    if (i - 2 == curr)
