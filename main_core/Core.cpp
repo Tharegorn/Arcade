@@ -107,24 +107,32 @@ void Core::init()
        // GraphicLib->printbox(12, 10, 1, 65);
        // GraphicLib->printText(0, 67, "Path");
         GraphicLib->refresh();
-       // keys(GraphicLib->getKey());
+        if (keys(GraphicLib->getKey()) == 84)
+            break;
     }
 }
 
-void Core::keys(int key)
+int Core::keys(int key)
 {
-    delete(GraphicLib);
     if (key == NEXT_LIB) {
+        delete(GraphicLib);
         if ((size_t)curr + 1 < Listlib.size())
             curr++;
         else
             curr = 0;
+        this->LibLoader();
     }
     if (key == PREVIOUS_LIB) {
+        delete(GraphicLib);
         if (curr - 1 >= 0)
             curr--;
         else
             curr = (int)Listlib.size();
+        this->LibLoader();
     }
-    this->LibLoader();
+    if (key == EXIT) {
+        delete(GraphicLib);
+        return (84);
+    }
+    return 0;
 }

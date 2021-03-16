@@ -26,7 +26,7 @@ class Core
         void check_files();
         void LibLoader();
         void init();
-        void keys(int key);
+        int keys(int key);
 
     enum keys {
         PREVIOUS_LIB = 'p',
