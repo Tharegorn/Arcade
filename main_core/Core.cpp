@@ -83,18 +83,6 @@ void Core::LibLoader()
 void Core::init()
 {
     while (1) {
-        // GraphicLib->printbox(40, 25, 20, 13);
-        // GraphicLib->printText(23, 37, "PACMAN");
-        // GraphicLib->printText(25, 32, "PRESS L TO START");
-        // GraphicLib->printbox(40, 25, 90, 13);
-        // GraphicLib->printText(23, 108, "SNAKE");
-        // GraphicLib->printText(25, 103, "PRESS M TO START");
-        // GraphicLib->printbox(30, 15, 140, 4);
-        // GraphicLib->printbox(30, 15, 140, 27);
-        // GraphicLib->printText(5, 152, "Games");
-        // GraphicLib->printText(28, 152, "Gfx Lib");
-        // GraphicLib->printText(40, 61, "PRESS N TO SWITCH TO NEXT LIB");
-        // GraphicLib->printText(42, 61, "PRESS P TO SWITCH TO PREV LIB");
         GraphicLib->refresh();
     }
 }
