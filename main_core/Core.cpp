@@ -83,60 +83,34 @@ void Core::LibLoader()
 
 void Core::init()
 {
-    //int i = 2;
-        //GraphicLib->clearwin();
     while (1) {
-       // GraphicLib->printbox(13, 10, 1, 1);
-        GraphicLib->printText(15, 15, "Libraries");
-        GraphicLib->printText(16, 15, "Libraries");
-        GraphicLib->printText(17, 15, "Libraries");
-        GraphicLib->printText(18, 15, "Libraries");
-        GraphicLib->printText(19, 15, "Libraries");
-        GraphicLib->printText(120, 15, "Libraries");
-        //for (const auto& x : libraries) {
-        //    GraphicLib->printText(i,4, x.first);
-        //    if (i - 2 == curr)
-        //        GraphicLib->printText(i, 2, ">");
-        //    i++;
-        //}
-      //  i = 2;
-       // GraphicLib->printbox(25, 10, 1, 15);
-       // GraphicLib->printText(0, 18, "Path");
-       // for (const auto& x : libraries) {
-       //     GraphicLib->printText(i,16, x.second);
-       //     i++;
-       // }
-       // i = 2;
-       // GraphicLib->printbox(12, 10, 1, 50);
-       // GraphicLib->printText(0, 52, "Games");
-       // GraphicLib->printbox(12, 10, 1, 65);
-       // GraphicLib->printText(0, 67, "Path");
-        GraphicLib->refresh();
-        if (keys(GraphicLib->getKey()) == 84)
-            break;
+       GraphicLib->drawMenu(libraries, curr);
+       if (keys(GraphicLib->getKey()) == 84)
+          break;
     }
 }
 
 int Core::keys(int key)
 {
-    if (key == NEXT_LIB) {
-        delete(GraphicLib);
+    if (key == NEXT_LIB || key == 169) {
+       delete(GraphicLib);
         if ((size_t)curr + 1 < Listlib.size())
             curr++;
         else
             curr = 0;
         this->LibLoader();
     }
-    if (key == PREVIOUS_LIB) {
-        delete(GraphicLib);
-        if (curr - 1 >= 0)
-            curr--;
+    if (key == PREVIOUS_LIB || key == 38) {
+       delete(GraphicLib);
+        if (curr - 1 == -1)
+            curr = maxlib;
         else
-            curr = (int)Listlib.size();
-        this->LibLoader();
+            curr--;
+       this->LibLoader();
     }
-    if (key == EXIT) {
-        delete(GraphicLib);
+    // pre game : 34 next game : 39, restart : 40 meny : 45 exit : 168
+    if (key == EXIT || key == 168) {
+       delete(GraphicLib);
         return (84);
     }
     return 0;

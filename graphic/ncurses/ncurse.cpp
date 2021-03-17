@@ -48,8 +48,39 @@ void ncurse::printbox(int x, int y, int h, int w)
     wrefresh(win);
 }
 
-extern "C" {
-    void *Launch() {
-        return(new ncurse());
+void ncurse::drawMenu(std::map<std::string, std::string> libraries, int curr)
+{
+    int i = 2;
+
+    this->clearwin();
+    this->printbox(13, 10, 1, 1);
+    this->printText(0, 2, "Libraries");
+    for (const auto &x : libraries)
+    {
+        this->printText(i, 4, x.first);
+        if (i - 2 == curr)
+            this->printText(i, 2, ">");
+        i++;
+    }
+    i = 2;
+    this->printbox(25, 10, 1, 15);
+    this->printText(0, 18, "Path");
+    for (const auto &x : libraries)
+    {
+        this->printText(i, 16, x.second);
+        i++;
+    }
+    i = 2;
+    this->printbox(12, 10, 1, 50);
+    this->printText(0, 52, "Games");
+    this->printbox(12, 10, 1, 65);
+    this->printText(0, 67, "Path");
+    this->refresh();
+}
+extern "C"
+{
+    void *Launch()
+    {
+        return (new ncurse());
     }
 }

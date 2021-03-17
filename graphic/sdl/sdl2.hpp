@@ -11,6 +11,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <map>
 
 class sdl: IGraphicLib
 {
@@ -22,6 +23,7 @@ class sdl: IGraphicLib
         void printText(int x, int y, std::string text);
         void refresh();
         void printbox(int x, int y, int h, int w);
+        void drawMenu(std::map<std::string, std::string> libraries, int curr);
     private:
         SDL_Window *win;
         SDL_Renderer *rend;
