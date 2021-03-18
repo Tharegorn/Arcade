@@ -75,6 +75,12 @@ void ncurse::drawMenu(std::map<std::string, std::string> libraries, int curr)
     this->printText(0, 52, "Games");
     this->printbox(12, 10, 1, 65);
     this->printText(0, 67, "Path");
+    this->printText(15, 0,"Keys:");
+    this->printText(16, 0,"1 and 2 : switch to next or previous lib");
+    this->printText(17, 0,"3 and 4 : switch to next or previous game");
+    this->printText(18, 0,"5 : Restart Game");
+    this->printText(19, 0,"6 : Return to menu");
+    this->printText(20, 0,"7 : Exit Arcade");
     this->refresh();
 }
 extern "C"

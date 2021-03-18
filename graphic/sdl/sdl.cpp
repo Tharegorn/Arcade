@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** B-OOP-400-LYN-4-1-arcade-romain.bouguet [WSL: Ubuntu-20.04]
 ** File description:
-** sdl
+** sdlè
 */
 
 #include "sdl2.hpp"
@@ -17,7 +17,7 @@ sdl::sdl()
     win = SDL_CreateWindow("Arcade - SDL",
                            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                            300, 300, SDL_WINDOW_SHOWN);
-    // SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
+    SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
     rend = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
     if (rend == nullptr)
         exit(EXIT_FAILURE);
@@ -108,6 +108,12 @@ void sdl::drawMenu(std::map<std::string, std::string> libraries, int curr)
         ctt++;
     }
     ctt = 2;
+    this->printText(8, 130,"Keys:");
+    this->printText(8, 135,"1 and 2 : switch to next or previous lib");
+    this->printText(8, 140,"3 and 4 : switch to next or previous game");
+    this->printText(8, 145,"5 : Restart Game");
+    this->printText(8, 150,"6 : Return to menu");
+    this->printText(8, 155,"7 : Exit Arcade");
     this->refresh();
 }
 
