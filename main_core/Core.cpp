@@ -113,5 +113,7 @@ int Core::keys(int key)
        delete(GraphicLib);
         return (84);
     }
+    if (key >= 'a' && key <= 'z')
+        GraphicLib->setName(key);
     return 0;
 }

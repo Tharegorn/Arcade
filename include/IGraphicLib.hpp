@@ -20,7 +20,7 @@ class IGraphicLib {
         virtual void refresh() = 0;
         virtual void printbox(int x, int y, int h, int w) = 0;
         virtual void drawMenu(std::map<std::string, std::string> libraries, int curr) = 0;
-
+        virtual void setName(char c) = 0;
 
     protected:
     private:

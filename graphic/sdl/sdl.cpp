@@ -14,7 +14,7 @@ sdl::sdl()
     if (TTF_Init() != 0)
         exit(EXIT_FAILURE);
     IMG_Init(IMG_INIT_PNG);
-    win = SDL_CreateWindow("Arcade - SDL",
+    win = SDL_CreateWindow("Arcade - SDL VERSION",
                            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                            300, 300, SDL_WINDOW_SHOWN);
     SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
@@ -41,8 +41,7 @@ int sdl::getKey()
     {
         if (event.type == SDL_QUIT)
             return ('x');
-        else if (event.type)
-        {
+        else {
             auto key = event.key.keysym.sym;
             if (key == SDLK_1)
                 return ('1');
@@ -58,6 +57,8 @@ int sdl::getKey()
                 return ('6');
             if (key == SDLK_7)
                 return ('7');
+            if (key >= 94 && key <= 122)
+                return key;
         }
     }
     return 0;
@@ -96,7 +97,8 @@ void sdl::drawMenu(std::map<std::string, std::string> libraries, int curr)
 {
     int a = 15;
     int ctt = 2;
-    this->printText(150, 5, "ARCADE MENU -- SDL VESION");
+    this->printText(150, 5, "ARCADE MENU -- SDL VERSION");
+    this->printText(150, 10, "Name: " + name);
     this->printText(8, 10, "LIBRARIES :");
     for (const auto &x : libraries)
     {
@@ -121,6 +123,13 @@ void sdl::printbox(int x, int y, int h, int w)
 {
 }
 
+void sdl::setName(char c)
+{
+    if (c == 987)
+        this->name.pop_back();
+    else
+        this->name.push_back(c);
+}
 extern "C"
 {
     void *Launch()

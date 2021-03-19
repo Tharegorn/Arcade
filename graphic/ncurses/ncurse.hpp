@@ -25,8 +25,10 @@ class ncurse: IGraphicLib
         void refresh();
         void printbox(int x, int y, int h, int w);
         void drawMenu(std::map<std::string, std::string> libraries, int curr);
+        void setName(char c);
     private:
         WINDOW *win;
+        std::string name;
 };
 
 #endif

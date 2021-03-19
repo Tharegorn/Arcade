@@ -71,6 +71,7 @@ void ncurse::drawMenu(std::map<std::string, std::string> libraries, int curr)
         i++;
     }
     i = 2;
+    this->printText(0, 100, "Name: " + name);
     this->printbox(12, 10, 1, 50);
     this->printText(0, 52, "Games");
     this->printbox(12, 10, 1, 65);
@@ -83,6 +84,15 @@ void ncurse::drawMenu(std::map<std::string, std::string> libraries, int curr)
     this->printText(20, 0,"7 : Exit Arcade");
     this->refresh();
 }
+
+void ncurse::setName(char c)
+{
+    if (c == 987)
+        this->name.pop_back();
+    else
+        this->name.push_back(c);
+}
+
 extern "C"
 {
     void *Launch()
