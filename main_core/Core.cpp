@@ -44,7 +44,7 @@ void Core::check_files()
 
     if ((dir = opendir("./lib/")) != nullptr) {
         while ((diread = readdir(dir)) != nullptr) {
-            if (strcmp(diread->d_name, ".") && strcmp(diread->d_name, ".."))
+            if (strcmp(diread->d_name, ".") && strcmp(diread->d_name, "..") && strcmp(diread->d_name, ".gitignore"))
                 files.push_back(diread->d_name);
         }
         closedir (dir);

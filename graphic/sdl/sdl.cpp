@@ -98,7 +98,8 @@ void sdl::drawMenu(std::map<std::string, std::string> libraries, int curr)
     int a = 15;
     int ctt = 2;
     this->printText(150, 5, "ARCADE MENU -- SDL VERSION");
-    this->printText(150, 10, "Name: " + name);
+    this->printText(150, 10, "Name: ");
+    this->printText(160, 10, name);
     this->printText(8, 10, "LIBRARIES :");
     for (const auto &x : libraries)
     {
