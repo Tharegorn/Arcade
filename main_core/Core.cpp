@@ -115,5 +115,7 @@ int Core::keys(int key)
     }
     if (key >= 'a' && key <= 'z')
         GraphicLib->setName(key);
+    if (key == 127 || key == BACKSPACE)
+        GraphicLib->setName('0');
     return 0;
 }

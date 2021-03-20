@@ -59,6 +59,8 @@ int sdl::getKey()
                 return ('7');
             if (key >= 94 && key <= 122)
                 return key;
+            if (key == SDLK_BACKSPACE)
+                return ('8');
         }
     }
     return 0;
@@ -95,6 +97,7 @@ void sdl::refresh()
 
 void sdl::drawMenu(std::map<std::string, std::string> libraries, int curr)
 {
+    this->clearwin();
     int a = 15;
     int ctt = 2;
     this->printText(150, 5, "ARCADE MENU -- SDL VERSION");
@@ -126,9 +129,10 @@ void sdl::printbox(int x, int y, int h, int w)
 
 void sdl::setName(char c)
 {
-    if (c == 987)
-        this->name.pop_back();
-    else
+    if (c == '0') {
+        if (strlen(this->name.c_str()) > 0)
+            this->name.pop_back();
+    } else
         this->name.push_back(c);
 }
 extern "C"

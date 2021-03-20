@@ -45,6 +45,8 @@ int libcaca::getKey()
             return '7';
         if (key >= 'a' && key <= 'z')
             return (key);
+        if (key == CACA_KEY_BACKSPACE)
+            return '8';
     }
     return 0;
 }
@@ -68,6 +70,7 @@ void libcaca::printbox(int x, int y, int h, int w)
 }
 void libcaca::drawMenu(std::map<std::string, std::string> libraries, int curr)
 {
+    this->clearwin();
     int a = 5;
     int ctt = 2;
     this->printText(100, 0, "ARCADE - LIBCACA VERSION");
@@ -92,9 +95,10 @@ void libcaca::drawMenu(std::map<std::string, std::string> libraries, int curr)
 
 void libcaca::setName(char c)
 {
-    if (c == 987)
-        this->name.pop_back();
-    else
+    if (c == '0') {
+        if (strlen(this->name.c_str()) > 0)
+            this->name.pop_back();
+    } else
         this->name.push_back(c);
 }
 

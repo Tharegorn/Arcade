@@ -87,9 +87,10 @@ void ncurse::drawMenu(std::map<std::string, std::string> libraries, int curr)
 
 void ncurse::setName(char c)
 {
-    if (c == 987)
-        this->name.pop_back();
-    else
+    if (c == '0') {
+        if (strlen(this->name.c_str()) > 0)
+            this->name.pop_back();
+    } else
         this->name.push_back(c);
 }
 

@@ -35,7 +35,8 @@ class Core
         NEXT_GAME = '4',
         RESTART = '5',
         MENU = '6',
-        EXIT = '7'
+        EXIT = '7',
+        BACKSPACE = '8',
     };
     private:
         int curr;
