@@ -13,7 +13,7 @@ CFLAGS	+=	-I ../../include/ -I ./
 
 OBJ     =	$(SRC:.c=.o)
 
-NAME	=   arcade_libcaca.so
+NAME	=   arcade_caca.so
 
 all:	$(NAME)
 

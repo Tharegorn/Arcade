@@ -16,7 +16,7 @@ sdl::sdl()
     IMG_Init(IMG_INIT_PNG);
     win = SDL_CreateWindow("Arcade - SDL VERSION",
                            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                           300, 300, SDL_WINDOW_SHOWN);
+                           1920, 1080, SDL_WINDOW_SHOWN);
     SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
     rend = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
     if (rend == nullptr)

@@ -13,7 +13,7 @@ CFLAGS	+=	-I ../../include/ -I ./
 
 OBJ     =	$(SRC:.c=.o)
 
-NAME	=   arcade_sdl.so
+NAME	=   arcade_sdl2.so
 
 all:	$(NAME)
 
