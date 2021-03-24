@@ -52,7 +52,7 @@ int libcaca::getKey()
 }
 void libcaca::clearwin()
 {
-    caca_set_color_argb(canva, 0, 0);
+    caca_set_color_argb(canva, 0, 80);
 	caca_clear_canvas(canva);
 }
 void libcaca::printText(int x, int y, std::string text)
@@ -68,7 +68,7 @@ void libcaca::refresh()
 void libcaca::printbox(int x, int y, int h, int w)
 {
 }
-void libcaca::drawMenu(std::map<std::string, std::string> libraries, int curr)
+void libcaca::drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act)
 {
     this->clearwin();
     int a = 5;
@@ -90,7 +90,6 @@ void libcaca::drawMenu(std::map<std::string, std::string> libraries, int curr)
     this->printText(8, 24,"F5 : Restart Game");
     this->printText(8, 25,"F6 : Return to menu");
     this->printText(8, 26,"F7 : Exit Arcade");
-    this->refresh();
 }
 
 void libcaca::setName(char c)

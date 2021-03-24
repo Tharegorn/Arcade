@@ -17,6 +17,7 @@
 #include <map>
 #include "Library.hpp"
 #include "IGraphicLib.hpp"
+#include "IGames.hpp"
 
 class Core
 {
@@ -25,6 +26,7 @@ class Core
         ~Core();
         void check_files();
         void LibLoader();
+        void GameLoader();
         void init();
         int keys(int key);
 
@@ -38,12 +40,21 @@ class Core
         EXIT = '7',
         BACKSPACE = '8',
     };
+    enum state {
+        INIT = 0,
+        GAME = 1
+    };
     private:
         int curr;
         int maxlib;
+        int actualgame;
         std::vector<char *> files;
         std::map<std::string, std::string> libraries;
+        std::map<std::string, std::string> games;
         std::vector<Library *> Listlib;
+        std::vector<Library *> Listgames;
         IGraphicLib *GraphicLib;
+        IGames *Game;
+        state act;
 };
 #endif /* !ARCADE_HPP_ */

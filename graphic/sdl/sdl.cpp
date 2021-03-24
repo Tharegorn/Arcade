@@ -95,7 +95,7 @@ void sdl::refresh()
     SDL_RenderPresent(rend);
 }
 
-void sdl::drawMenu(std::map<std::string, std::string> libraries, int curr)
+void sdl::drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act)
 {
     this->clearwin();
     int a = 15;

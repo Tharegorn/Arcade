@@ -24,7 +24,7 @@ class ncurse: IGraphicLib
         void printText(int x, int y, std::string text);
         void refresh();
         void printbox(int x, int y, int h, int w);
-        void drawMenu(std::map<std::string, std::string> libraries, int curr);
+        void drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act);
         void setName(char c);
     private:
         WINDOW *win;
