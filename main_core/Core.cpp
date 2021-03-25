@@ -156,7 +156,9 @@ int Core::keys(int key)
         act = GAME;
         this->GameLoader();
     }
-    //restart : 40 meny : 45 exit : 168
+    if (key == MENU || key == 45)
+        act = INIT;
+    //restart : 40
     if (key == EXIT || key == 168) {
        delete(GraphicLib);
         return (84);
