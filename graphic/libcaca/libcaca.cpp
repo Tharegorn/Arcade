@@ -65,8 +65,16 @@ void libcaca::refresh()
 {
     caca_refresh_display(win);
 }
-void libcaca::printbox(int x, int y, int h, int w)
+void libcaca::printbox(int h, int w, int x, int y)
 {
+    for (int i = x; i <= w; i++) {
+        for (int j = y; j <= h; j++) {
+            if (i == x || i == w)
+                printText(i, j, "-");
+            if (j == y || j == h)
+                printText(i, j, "|");
+        }
+    }
 }
 void libcaca::drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act)
 {
@@ -75,6 +83,7 @@ void libcaca::drawMenu(std::map<std::string, std::string> libraries,std::map<std
     int ctt = 2;
     this->printText(100, 0, "ARCADE - LIBCACA VERSION");
     this->printText(100, 3, "Name: " + name);
+    this->printText(8, 2, "LIBRARIES");
     for (const auto &x : libraries) {
         if (ctt - 2 == curr)
             this->printText(8, a, "> " + x.first);
@@ -83,6 +92,18 @@ void libcaca::drawMenu(std::map<std::string, std::string> libraries,std::map<std
         a += 1;
         ctt++;
     }
+    a = 5;
+    ctt = 2;
+    this->printText(30, 2, "GAMES");
+    for (const auto &x : games) {
+        if (ctt - 2 == act)
+            this->printText(30, a, "> " + x.first);
+        else
+            this->printText(30, a, x.first);
+        a += 1;
+        ctt++;
+    }
+    a = 5;
     ctt = 2;
     this->printText(8, 20,"Keys:");
     this->printText(8, 22,"F1 and F2 : switch to next or previous lib");

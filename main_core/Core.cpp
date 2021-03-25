@@ -108,8 +108,10 @@ void Core::init()
     while (1) {
         if (act == INIT)
             GraphicLib->drawMenu(libraries, games, curr, actualgame);
-        else
-            Game->mapborder(GraphicLib, 0, 0, 10, 10);
+        else {
+            GraphicLib->clearwin();
+            Game->mapborder(GraphicLib, 20, 20, 0, 20);
+        }
        GraphicLib->refresh();
        if (keys(GraphicLib->getKey()) == 84)
           break;
@@ -134,7 +136,27 @@ int Core::keys(int key)
             curr--;
        this->LibLoader();
     }
-    // pre game : 34 next game : 39, restart : 40 meny : 45 exit : 168
+    if (key == NEXT_GAME || key == 39) {
+       delete(Game);
+        if ((size_t)actualgame + 1 < Listgames.size())
+            actualgame++;
+        else
+            actualgame = 0;
+        this->GameLoader();
+    }
+    if (key == PREVIOUS_GAME || key == 36) {
+       delete(Game);
+        if (actualgame - 1 == -1)
+            actualgame = Listgames.size() - 1;
+        else
+            actualgame--;
+       this->GameLoader();
+    }
+    if (key == RESTART || key == 40) {
+        act = GAME;
+        this->GameLoader();
+    }
+    //restart : 40 meny : 45 exit : 168
     if (key == EXIT || key == 168) {
        delete(GraphicLib);
         return (84);

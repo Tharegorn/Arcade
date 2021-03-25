@@ -33,7 +33,7 @@ class Core
     enum keys {
         PREVIOUS_LIB = '1',
         NEXT_LIB = '2',
-        PEVIOUS_GAME = '3',
+        PREVIOUS_GAME = '3',
         NEXT_GAME = '4',
         RESTART = '5',
         MENU = '6',

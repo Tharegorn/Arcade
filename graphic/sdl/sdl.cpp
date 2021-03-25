@@ -90,8 +90,19 @@ void sdl::printText(int x, int y, std::string text)
     SDL_DestroyTexture(Message);
 }
 
+
+void sdl::printbox(int h, int w, int x, int y)
+{
+    SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+
+    SDL_RenderDrawLine(rend, x, y, w * 30, y);
+    SDL_RenderDrawLine(rend, x, h * 30, w * 30, h * 30);
+    SDL_RenderDrawLine(rend, x, y, x, h * 30);
+    SDL_RenderDrawLine(rend, w * 30, y, w * 30, h * 30);
+}
 void sdl::refresh()
 {
+    SDL_SetRenderDrawColor( rend, 0xFF, 0x00, 0x00, 0xFF );
     SDL_RenderPresent(rend);
 }
 
@@ -114,6 +125,18 @@ void sdl::drawMenu(std::map<std::string, std::string> libraries,std::map<std::st
         ctt++;
     }
     ctt = 2;
+    this->printText(50, 10, "GAMES :");
+    a = 15;
+    for (const auto &x : games)
+    {
+        if (ctt -2 == act)
+            this->printText(50, a, "> " + x.first);
+        else
+            this->printText(50, a, x.first);
+        a += 5;
+        ctt++;
+    }
+    ctt = 2;
     this->printText(8, 130,"Keys:");
     this->printText(8, 135,"1 and 2 : switch to next or previous lib");
     this->printText(8, 140,"3 and 4 : switch to next or previous game");
@@ -121,10 +144,6 @@ void sdl::drawMenu(std::map<std::string, std::string> libraries,std::map<std::st
     this->printText(8, 150,"6 : Return to menu");
     this->printText(8, 155,"7 : Exit Arcade");
     this->refresh();
-}
-
-void sdl::printbox(int x, int y, int h, int w)
-{
 }
 
 void sdl::setName(char c)
