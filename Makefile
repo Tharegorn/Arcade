@@ -7,9 +7,10 @@
 
 all:
 	@make --no-print-directory -C main_core
-	$(graphicals)
-	$(games)
-
+	@make --no-print-directory -C graphic/ncurses/
+	@make --no-print-directory -C graphic/sdl/
+	@make --no-print-directory -C graphic/libcaca/
+	@make --no-print-directory -C games/nibler/
 
 
 clean:
