@@ -9,6 +9,7 @@
 #define NIBLER_HPP_
 
 #include "../../include/IGames.hpp"
+#include <time.h>
 
 class player
 {
@@ -47,6 +48,7 @@ private:
     int dir = 4;
     std::vector<player *> snake;
     player *pfood;
+    clock_t clk;
 };
 
 #endif /* !NIBLER_HPP_ */

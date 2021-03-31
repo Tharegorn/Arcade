@@ -13,6 +13,8 @@
 #include <map>
 #include <vector>
 #include "IGraphicLib.hpp"
+#include <time.h>
+#include <iomanip>
 
 class IGames {
     public:
