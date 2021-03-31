@@ -21,7 +21,7 @@ sdl::sdl()
     rend = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
     if (rend == nullptr)
         exit(EXIT_FAILURE);
-    font = TTF_OpenFont("assets/ARCADE.TTF", 200);
+    font = TTF_OpenFont("assets/ARCADE.TTF", 180);
     back = IMG_LoadTexture(rend,
                            "assets/test.png");
 }
@@ -83,7 +83,7 @@ void sdl::printText(int x, int y, std::string text)
     SDL_Rect Message_rect;
     Message_rect.y = y * 5;
     Message_rect.x = x * 5;
-    Message_rect.w = text.length() * 10;
+    Message_rect.w = text.length() * 15;
     Message_rect.h = 24;
     SDL_RenderCopy(rend, Message, NULL, &Message_rect);
     SDL_FreeSurface(surfaceMessage);
@@ -95,10 +95,16 @@ void sdl::printbox(int h, int w, int x, int y)
 {
     SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
 
-    SDL_RenderDrawLine(rend, x, y, w * 30, y);
-    SDL_RenderDrawLine(rend, x, h * 30, w * 30, h * 30);
-    SDL_RenderDrawLine(rend, x, y, x, h * 30);
-    SDL_RenderDrawLine(rend, w * 30, y, w * 30, h * 30);
+    // SDL_RenderDrawLine(rend, x, y, w * 30, y);
+    // SDL_RenderDrawLine(rend, x, h * 30, w * 30, h * 30);
+    // SDL_RenderDrawLine(rend, x, y, x, h * 30);
+    // SDL_RenderDrawLine(rend, w * 30, y, w * 30, h * 30);
+    SDL_Rect r;
+    r.x = x;
+    r.y = y;
+    r.w = h * 6;
+    r.h = w * 6;
+    SDL_RenderDrawRect( rend, &r );
 }
 void sdl::refresh()
 {

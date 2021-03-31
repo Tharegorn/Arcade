@@ -31,7 +31,7 @@ void ncurse::clearwin()
 
 void ncurse::printText(int x, int y, std::string text)
 {
-    mvprintw(x, y, text.c_str());
+    mvprintw(y, x, text.c_str());
 }
 
 void ncurse::refresh()
@@ -54,48 +54,48 @@ void ncurse::drawMenu(std::map<std::string, std::string> libraries,std::map<std:
 
     this->clearwin();
     this->printbox(13, 10, 1, 1);
-    this->printText(0, 2, "Libraries");
+    this->printText(2, 0, "Libraries");
     for (const auto &x : libraries)
     {
-        this->printText(i, 4, x.first);
+        this->printText(4, i, x.first);
         if (i - 2 == curr)
-            this->printText(i, 2, ">");
+            this->printText(2, i, ">");
         i++;
     }
     i = 2;
     this->printbox(25, 10, 1, 15);
-    this->printText(0, 18, "Path");
+    this->printText(18, 0, "Path");
     for (const auto &x : libraries)
     {
-        this->printText(i, 16, x.second);
+        this->printText(16, i, x.second);
         i++;
     }
     i = 2;
     for (const auto &x : games)
     {
-        this->printText(i, 53, x.first);
+        this->printText(53, i, x.first);
                 if (i - 2 == act)
-            this->printText(i, 51, ">");
+            this->printText(51, i, ">");
         i++;
     }
     i = 2;
     for (const auto &x : games)
     {
-        this->printText(i, 66, x.second);
+        this->printText(66, i, x.second);
         i++;
     }
     i = 2;
-    this->printText(0, 100, "Name: " + name);
+    this->printText(100, 0, "Name: " + name);
     this->printbox(12, 10, 1, 50);
-    this->printText(0, 52, "Games");
+    this->printText(52, 0, "Games");
     this->printbox(23, 10, 1, 65);
-    this->printText(0, 67, "Path");
-    this->printText(15, 0,"Keys:");
-    this->printText(16, 0,"1 and 2 : switch to next or previous lib");
-    this->printText(17, 0,"3 and 4 : switch to next or previous game");
-    this->printText(18, 0,"5 : Restart Game");
-    this->printText(19, 0,"6 : Return to menu");
-    this->printText(20, 0,"7 : Exit Arcade");
+    this->printText(67, 0, "Path");
+    this->printText(0, 15,"Keys:");
+    this->printText(0, 16,"1 and 2 : switch to next or previous lib");
+    this->printText(0, 17,"3 and 4 : switch to next or previous game");
+    this->printText(0, 18,"5 : Restart Game");
+    this->printText(0, 19,"6 : Return to menu");
+    this->printText(0, 20,"7 : Exit Arcade");
 }
 
 void ncurse::setName(char c)

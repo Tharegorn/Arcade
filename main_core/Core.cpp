@@ -110,7 +110,12 @@ void Core::init()
             GraphicLib->drawMenu(libraries, games, curr, actualgame);
         else {
             GraphicLib->clearwin();
-            Game->mapborder(GraphicLib, 20, 20, 0, 20);
+            if (Game->run(GraphicLib) == -84) {
+                delete(Game);
+                act = INIT;
+                GraphicLib->clearwin();
+                GraphicLib->drawMenu(libraries, games, curr, actualgame);
+            }
         }
        GraphicLib->refresh();
        if (keys(GraphicLib->getKey()) == 84)
@@ -163,9 +168,20 @@ int Core::keys(int key)
        delete(GraphicLib);
         return (84);
     }
-    if (key >= 'a' && key <= 'z')
-        GraphicLib->setName(key);
-    if (key == 127 || key == BACKSPACE)
-        GraphicLib->setName('0');
+    if (act == INIT) {
+        if (key >= 'a' && key <= 'z')
+            GraphicLib->setName(key);
+        if (key == 127 || key == BACKSPACE)
+            GraphicLib->setName('0');
+    } else {
+        if (key == 'd')
+            Game->getInput(4);
+        if (key == 's')
+            Game->getInput(2);
+        if (key == 'q')
+            Game->getInput(3);
+        if (key == 'z')
+            Game->getInput(1);
+    }
     return 0;
 }

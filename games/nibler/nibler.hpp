@@ -10,12 +10,43 @@
 
 #include "../../include/IGames.hpp"
 
-class nibler: IGames
+class player
 {
     public:
-        nibler();
-        ~nibler() override;
-        void mapborder(IGraphicLib *GraphicLib,int x, int y, int z, int v);
+        player(int x, int y, std::string symbol)
+        {
+            this->x = x;
+            this->y = y;
+            this->symbol = symbol;
+        };
+        int x;
+        int y;
+        std::string symbol;
+};
+
+class nibler : IGames
+{
+public:
+    nibler();
+    ~nibler() override;
+    void mapborder(IGraphicLib *GraphicLib, int x, int y, int z, int v);
+    void drawFood(IGraphicLib *GraphicLib, int x, int y);
+    int run(IGraphicLib *GraphicLib);
+    void drawSnake(IGraphicLib *GraphicLib);
+    int mooveSnake(IGraphicLib *GraphicLib);
+    void getInput(int a);
+
+
+
+private:
+    int x;
+    int y;
+    int h;
+    int w;
+    bool food = false;
+    int dir = 4;
+    std::vector<player *> snake;
+    player *pfood;
 };
 
 #endif /* !NIBLER_HPP_ */

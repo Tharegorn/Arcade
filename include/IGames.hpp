@@ -11,12 +11,16 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <vector>
 #include "IGraphicLib.hpp"
 
 class IGames {
     public:
         virtual ~IGames() = default;
         virtual void mapborder(IGraphicLib *GraphicLib,int x, int y, int z, int v) = 0;
+        virtual void drawFood(IGraphicLib *GraphicLib, int x, int y) = 0;
+        virtual int run(IGraphicLib *GraphicLib) = 0;
+        virtual void getInput(int a) = 0;
 
     protected:
     private:
