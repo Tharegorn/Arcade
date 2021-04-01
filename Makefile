@@ -51,3 +51,5 @@ graphicals:
 	@make --no-print-directory -C graphic/ncurses/
 	@make --no-print-directory -C graphic/sdl/
 	@make --no-print-directory -C graphic/libcaca/
+
+.PHONY: all clean fclean re core games graphicals
