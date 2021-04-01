@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <vector>
 
 #pragma once
 
@@ -21,6 +22,8 @@ class IGraphicLib {
         virtual void printbox(int x, int y, int h, int w) = 0;
         virtual void drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act) = 0;
         virtual void setName(char c) = 0;
+        virtual void gameboard() = 0;
+        virtual std::vector<int> get_board() = 0;
 
     protected:
     private:

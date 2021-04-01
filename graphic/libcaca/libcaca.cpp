@@ -9,7 +9,7 @@
 
 libcaca::libcaca()
 {
-    canva = caca_create_canvas(960, 540);
+    canva = caca_create_canvas(1920, 1080);
 	win = caca_create_display(canva);
 	if (win == nullptr)
 		exit(EXIT_FAILURE);
@@ -21,6 +21,25 @@ libcaca::~libcaca()
     caca_free_display(win);
 	win = nullptr;
 	canva = nullptr;
+}
+
+std::vector<int> libcaca::get_board()
+{
+    std::vector<int> vec;
+    vec.push_back(caca_get_display_height(win) - 961);
+    vec.push_back(caca_get_display_width(win) - 1681);
+    vec.push_back(0);
+    vec.push_back((10 * caca_get_display_height(win)) / 100);
+    return (vec);
+}
+
+void libcaca::gameboard()
+{
+    int h = caca_get_display_height(win);
+    int w = caca_get_display_width(win);
+    std::cout << h << ":" << w << std::endl;
+    std::cout << (10 * h) / 100 << std::endl;
+    printbox(h - 961, w - 1681, 0, (10 * (h - 961)) / 100);
 }
 
 int libcaca::getKey()

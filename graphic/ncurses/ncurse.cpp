@@ -39,6 +39,26 @@ void ncurse::refresh()
     wrefresh(win);
 }
 
+std::vector<int> ncurse::get_board()
+{
+    //height::width::x::y
+    std::vector<int> vect;
+    vect.push_back(100);
+    vect.push_back(100);
+    vect.push_back(0);
+    vect.push_back((10 * getmaxy(win)) / 100);
+    return (vect);
+}
+
+void ncurse::gameboard()
+{
+    WINDOW *t = subwin(win, 0, 0, (10 * getmaxy(win)) / 100, 0);
+    box(t, ACS_VLINE, ACS_HLINE);
+    touchwin(t);
+    wrefresh(t);
+    wrefresh(win);
+}
+
 void ncurse::printbox(int x, int y, int h, int w)
 {
     WINDOW *t = subwin(win, y, x, h, w);

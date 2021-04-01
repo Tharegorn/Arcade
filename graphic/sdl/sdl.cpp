@@ -90,15 +90,28 @@ void sdl::printText(int x, int y, std::string text)
     SDL_DestroyTexture(Message);
 }
 
+std::vector<int> sdl::get_board()
+{
+    int h, w;
+    SDL_GetWindowSize(win, &w, &h);
+    std::vector<int> vect;
+    vect.push_back(h);
+    vect.push_back(w);
+    vect.push_back(0);
+    vect.push_back((10 * h) / 100);
+    return (vect);
+}
 
+void sdl::gameboard()
+{
+    int h, w;
+    SDL_GetWindowSize(win, &w, &h);
+    printbox(h, w, 0, (10 * h)/100);
+}
 void sdl::printbox(int h, int w, int x, int y)
 {
     SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
 
-    // SDL_RenderDrawLine(rend, x, y, w * 30, y);
-    // SDL_RenderDrawLine(rend, x, h * 30, w * 30, h * 30);
-    // SDL_RenderDrawLine(rend, x, y, x, h * 30);
-    // SDL_RenderDrawLine(rend, w * 30, y, w * 30, h * 30);
     SDL_Rect r;
     r.x = x;
     r.y = y;

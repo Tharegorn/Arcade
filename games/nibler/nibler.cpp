@@ -9,23 +9,7 @@
 
 nibler::nibler()
 {
-    x = 0;
-    y = 0;
-    h = 0;
-    w = 0;
-    for (int i = 0; i != 4; i++)
-    {
-        if (i == 0)
-        {
-            player *p = new player(10 - i, 10, "0");
-            snake.push_back(p);
-        }
-        else
-        {
-            player *p = new player(10 - i, 10, "X");
-            snake.push_back(p);
-        }
-    }
+
     clk = clock();
 }
 
@@ -110,16 +94,38 @@ int nibler::mooveSnake(IGraphicLib *GraphicLib)
     return (0);
 }
 
+void nibler::init(IGraphicLib *GraphicLib)
+{
+    std::vector<int> size = GraphicLib->get_board();
+    x = size[2];
+    y = size[3];
+    h = size[0];
+    w = size[1];
+    for (int i = 0; i != 4; i++)
+    {
+        if (i == 0)
+        {
+            player *p = new player((w / 2) - i, (h / 2), "0");
+            snake.push_back(p);
+        }
+        else
+        {
+            player *p = new player((w / 2) - i, (h / 2), "X");
+            snake.push_back(p);
+        }
+    }
+}
 int nibler::run(IGraphicLib *GraphicLib)
 {
     GraphicLib->clearwin();
-    mapborder(GraphicLib, 20, 20, 0, 0);
-    drawSnake(GraphicLib);
     if (food == false)
     {
-        pfood = new player(3, 3, "F");
+        init(GraphicLib);
+        pfood = new player(rand() % (this->w - 1) + (this->x + 1), rand() % (this->h - 1) + (this->y + 1), "F");
         food = true;
     }
+    mapborder(GraphicLib);
+    drawSnake(GraphicLib);
     if (mooveSnake(GraphicLib) == -84)
         return -84;
     drawFood(GraphicLib, pfood->x, pfood->y);
@@ -131,13 +137,9 @@ int nibler::run(IGraphicLib *GraphicLib)
     return (0);
 }
 
-void nibler::mapborder(IGraphicLib *GraphicLib, int h, int w, int x, int y)
+void nibler::mapborder(IGraphicLib *GraphicLib)
 {
-    this->x = x;
-    this->y = y;
-    this->h = h;
-    this->w = w;
-    GraphicLib->printbox(h, w, x, y);
+    GraphicLib->gameboard();
 }
 extern "C"
 {

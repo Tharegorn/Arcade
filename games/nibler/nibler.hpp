@@ -30,12 +30,14 @@ class nibler : IGames
 public:
     nibler();
     ~nibler() override;
-    void mapborder(IGraphicLib *GraphicLib, int x, int y, int z, int v);
+    void mapborder(IGraphicLib *GraphicLib);
     void drawFood(IGraphicLib *GraphicLib, int x, int y);
     int run(IGraphicLib *GraphicLib);
     void drawSnake(IGraphicLib *GraphicLib);
     int mooveSnake(IGraphicLib *GraphicLib);
     void getInput(int a);
+    void init(IGraphicLib *GraphicLib);
+
 
 
 
