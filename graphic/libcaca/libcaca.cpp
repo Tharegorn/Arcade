@@ -23,25 +23,6 @@ libcaca::~libcaca()
 	canva = nullptr;
 }
 
-std::vector<int> libcaca::get_board()
-{
-    std::vector<int> vec;
-    vec.push_back(caca_get_display_height(win) - 961);
-    vec.push_back(caca_get_display_width(win) - 1681);
-    vec.push_back(0);
-    vec.push_back((10 * caca_get_display_height(win)) / 100);
-    return (vec);
-}
-
-void libcaca::gameboard()
-{
-    int h = caca_get_display_height(win);
-    int w = caca_get_display_width(win);
-    std::cout << h << ":" << w << std::endl;
-    std::cout << (10 * h) / 100 << std::endl;
-    printbox(h - 961, w - 1681, 0, (10 * (h - 961)) / 100);
-}
-
 int libcaca::getKey()
 {
     caca_event_t event;
@@ -95,7 +76,7 @@ void libcaca::printbox(int h, int w, int x, int y)
         }
     }
 }
-void libcaca::drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act)
+void libcaca::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act)
 {
     this->clearwin();
     int a = 5;
@@ -103,22 +84,22 @@ void libcaca::drawMenu(std::map<std::string, std::string> libraries,std::map<std
     this->printText(100, 0, "ARCADE - LIBCACA VERSION");
     this->printText(100, 3, "Name: " + name);
     this->printText(8, 2, "LIBRARIES");
-    for (const auto &x : libraries) {
+    for (const auto x : libraries) {
         if (ctt - 2 == curr)
-            this->printText(8, a, "> " + x.first);
+            this->printText(8, a, "> " + x);
         else
-            this->printText(8, a, x.first);
+            this->printText(8, a, x);
         a += 1;
         ctt++;
     }
     a = 5;
     ctt = 2;
     this->printText(30, 2, "GAMES");
-    for (const auto &x : games) {
+    for (const auto x : games) {
         if (ctt - 2 == act)
-            this->printText(30, a, "> " + x.first);
+            this->printText(30, a, "> " + x);
         else
-            this->printText(30, a, x.first);
+            this->printText(30, a, x);
         a += 1;
         ctt++;
     }

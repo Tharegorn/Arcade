@@ -16,12 +16,12 @@ Core::Core(std::string path)
     int ite = 0;
     bool current = false;
     check_files();
-    for (const auto& x : libraries)
-        Listlib.push_back(new Library(x.second));
-    for (const auto& x : games)
-        Listgames.push_back(new Library(x.second));
-    for (const auto& x : libraries) {
-        if (x.second == path) {
+    for (const auto x : libraries)
+        Listlib.push_back(new Library("lib/arcade_" + x + ".so"));
+    for (const auto x : games)
+        Listgames.push_back(new Library("lib/arcade_" + x + ".so"));
+    for (const auto x : libraries) {
+        if ("lib/arcace_" + x + ".so" == path) {
             curr = ite;
             current = true;
         }
@@ -67,11 +67,11 @@ void Core::check_files()
         auto name = str;
         name.erase(0, 7);
         name.erase(name.length() - 3, 3);
-        std::cout << name + str << std::endl;
-        if (name == "ncurses" || name == "sdl2" || name == "libcaca")
-            libraries[name] = "lib/" + str;
+        std::cout << name << std::endl;
+        if (name == "ncurses" || name == "sdl2" || name == "libcaca" || name == "sfml")
+            libraries.push_back(name);
         else
-            games[name] = "lib/" + str;
+            games.push_back(name);
     }
 }
 

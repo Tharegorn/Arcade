@@ -90,24 +90,6 @@ void sdl::printText(int x, int y, std::string text)
     SDL_DestroyTexture(Message);
 }
 
-std::vector<int> sdl::get_board()
-{
-    int h, w;
-    SDL_GetWindowSize(win, &w, &h);
-    std::vector<int> vect;
-    vect.push_back(h);
-    vect.push_back(w);
-    vect.push_back(0);
-    vect.push_back((10 * h) / 100);
-    return (vect);
-}
-
-void sdl::gameboard()
-{
-    int h, w;
-    SDL_GetWindowSize(win, &w, &h);
-    printbox(h, w, 0, (10 * h)/100);
-}
 void sdl::printbox(int h, int w, int x, int y)
 {
     SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
@@ -125,7 +107,7 @@ void sdl::refresh()
     SDL_RenderPresent(rend);
 }
 
-void sdl::drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act)
+void sdl::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act)
 {
     this->clearwin();
     int a = 15;
@@ -134,24 +116,24 @@ void sdl::drawMenu(std::map<std::string, std::string> libraries,std::map<std::st
     this->printText(150, 10, "Name: ");
     this->printText(160, 10, name);
     this->printText(8, 10, "LIBRARIES :");
-    for (const auto &x : libraries)
+    for (const auto x : libraries)
     {
         if (ctt - 2 == curr)
-            this->printText(8, a, "> " + x.first);
+            this->printText(8, a, "> " + x);
         else
-            this->printText(8, a, x.first);
+            this->printText(8, a, x);
         a += 5;
         ctt++;
     }
     ctt = 2;
     this->printText(50, 10, "GAMES :");
     a = 15;
-    for (const auto &x : games)
+    for (const auto x : games)
     {
         if (ctt -2 == act)
-            this->printText(50, a, "> " + x.first);
+            this->printText(50, a, "> " + x);
         else
-            this->printText(50, a, x.first);
+            this->printText(50, a, x);
         a += 5;
         ctt++;
     }

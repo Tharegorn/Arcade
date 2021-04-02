@@ -39,77 +39,49 @@ void ncurse::refresh()
     wrefresh(win);
 }
 
-std::vector<int> ncurse::get_board()
+void ncurse::printbox(int h, int w, int x, int y)
 {
-    //height::width::x::y
-    std::vector<int> vect;
-    vect.push_back(100);
-    vect.push_back(100);
-    vect.push_back(0);
-    vect.push_back((10 * getmaxy(win)) / 100);
-    return (vect);
+      for (int i = x; i <= w; i++) {
+        for (int j = y; j <= h; j++) {
+            if (i == x || i == w)
+                printText(i, j, "-");
+            if (j == y || j == h)
+                printText(i, j, "|");
+        }
+    }
+    // WINDOW *t = subwin(win, y, x, h, w);
+    // box(t, ACS_VLINE, ACS_HLINE);
+    // touchwin(t);
+    // wrefresh(t);
+    // wrefresh(win);
 }
 
-void ncurse::gameboard()
-{
-    WINDOW *t = subwin(win, 0, 0, (10 * getmaxy(win)) / 100, 0);
-    box(t, ACS_VLINE, ACS_HLINE);
-    touchwin(t);
-    wrefresh(t);
-    wrefresh(win);
-}
-
-void ncurse::printbox(int x, int y, int h, int w)
-{
-    WINDOW *t = subwin(win, y, x, h, w);
-    box(t, ACS_VLINE, ACS_HLINE);
-    touchwin(t);
-    wrefresh(t);
-    wrefresh(win);
-}
-
-void ncurse::drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act)
+void ncurse::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act)
 {
     int i = 2;
 
     this->clearwin();
-    this->printbox(13, 10, 1, 1);
+    this->printbox(10, 12, 1, 1);
     this->printText(2, 0, "Libraries");
-    for (const auto &x : libraries)
+    for (const auto x : libraries)
     {
-        this->printText(4, i, x.first);
+        this->printText(4, i, x);
         if (i - 2 == curr)
             this->printText(2, i, ">");
         i++;
     }
     i = 2;
-    this->printbox(25, 10, 1, 15);
-    this->printText(18, 0, "Path");
-    for (const auto &x : libraries)
+    for (const auto x : games)
     {
-        this->printText(16, i, x.second);
-        i++;
-    }
-    i = 2;
-    for (const auto &x : games)
-    {
-        this->printText(53, i, x.first);
+        this->printText(53, i, x);
                 if (i - 2 == act)
             this->printText(51, i, ">");
         i++;
     }
     i = 2;
-    for (const auto &x : games)
-    {
-        this->printText(66, i, x.second);
-        i++;
-    }
-    i = 2;
     this->printText(100, 0, "Name: " + name);
-    this->printbox(12, 10, 1, 50);
+    this->printbox(10, 10, 1, 50);
     this->printText(52, 0, "Games");
-    this->printbox(23, 10, 1, 65);
-    this->printText(67, 0, "Path");
     this->printText(0, 15,"Keys:");
     this->printText(0, 16,"1 and 2 : switch to next or previous lib");
     this->printText(0, 17,"3 and 4 : switch to next or previous game");

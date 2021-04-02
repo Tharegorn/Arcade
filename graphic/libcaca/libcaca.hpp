@@ -24,10 +24,9 @@ class libcaca: IGraphicLib {
         void printText(int x, int y, std::string text);
         void refresh();
         void printbox(int x, int y, int h, int w);
-        void drawMenu(std::map<std::string, std::string> libraries,std::map<std::string, std::string> games, int curr, int act);
+        void drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act);
         void setName(char c);
-        void gameboard();
-        std::vector<int> get_board();
+
     private:
         caca_canvas_t *canva;
 		caca_display_t *win;

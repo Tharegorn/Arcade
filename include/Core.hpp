@@ -49,8 +49,8 @@ class Core
         int maxlib;
         int actualgame;
         std::vector<char *> files;
-        std::map<std::string, std::string> libraries;
-        std::map<std::string, std::string> games;
+        std::vector<std::string> libraries;
+        std::vector<std::string> games;
         std::vector<Library *> Listlib;
         std::vector<Library *> Listgames;
         IGraphicLib *GraphicLib;
