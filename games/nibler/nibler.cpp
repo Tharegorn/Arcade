@@ -62,7 +62,7 @@ int nibler::mooveSnake(IGraphicLib *GraphicLib)
         int nx = snake[snake.size() - 1]->x;
         int ny = snake[snake.size() - 1]->y;
         delete (pfood);
-        pfood = new player(rand() % 23 + 8, rand() % 23 + 8, "F");
+        pfood = new player(rand() % 19 + 11, rand() % 19 + 11, "F");
         if (dir == 1)
             snake.push_back(new player(nx, ny + 1, "X"));
         if (dir == 2)
@@ -128,7 +128,7 @@ void nibler::mapborder(IGraphicLib *GraphicLib)
 }
 extern "C"
 {
-    void *Game()
+    void *Launch()
     {
         return (new nibler());
     }

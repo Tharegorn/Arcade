@@ -49,7 +49,7 @@ void ncurse::printbox(int h, int w, int x, int y)
                 printText(i, j, "|");
         }
     }
-    // WINDOW *t = subwin(win, y, x, h, w);
+    // WINDOW *t = subwin(win, w, h, y, x);
     // box(t, ACS_VLINE, ACS_HLINE);
     // touchwin(t);
     // wrefresh(t);

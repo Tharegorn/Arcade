@@ -41,7 +41,6 @@ int main( int ac, char **av)
         return -1;
     }
     Core *test = new Core(av[1]);
-    std::cout << test->EXIT << std::endl;
     test->init();
     return (0);
 }

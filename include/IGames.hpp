@@ -16,6 +16,20 @@
 #include <time.h>
 #include <iomanip>
 
+class player
+{
+    public:
+        player(int x, int y, std::string symbol)
+        {
+            this->x = x;
+            this->y = y;
+            this->symbol = symbol;
+        };
+        int x;
+        int y;
+        std::string symbol;
+};
+
 class IGames {
     public:
         virtual ~IGames() = default;
@@ -23,6 +37,7 @@ class IGames {
         virtual void drawFood(IGraphicLib *GraphicLib, int x, int y) = 0;
         virtual int run(IGraphicLib *GraphicLib) = 0;
         virtual void getInput(int a) = 0;
+        virtual char libType() = 0;
 
     protected:
     private:

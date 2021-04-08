@@ -94,7 +94,7 @@ void Core::GameLoader()
     function lib;
     char *err;
 
-    lib = (function) dlsym(Listgames[actualgame]->get_open(), "Game");
+    lib = (function) dlsym(Listgames[actualgame]->get_open(), "Launch");
     if ((err = dlerror()) != nullptr) {
         std::cerr << err << std::endl;
         exit(84);

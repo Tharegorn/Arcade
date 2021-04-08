@@ -26,6 +26,7 @@ class ncurse: IGraphicLib
         void printbox(int x, int y, int h, int w);
         void drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act);
         void setName(char c);
+        char libType() { return ('L');}
 
     private:
         WINDOW *win;

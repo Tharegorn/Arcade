@@ -11,7 +11,7 @@ all:
 	@make --no-print-directory -C graphic/sdl/
 	@make --no-print-directory -C graphic/libcaca/
 	@make --no-print-directory -C games/nibler/
-	# @make --no-print-directory -C games/solarfox/
+	@make --no-print-directory -C games/solarfox/
 
 
 clean:
@@ -21,7 +21,7 @@ clean:
 	@make clean --no-print-directory -C graphic/sdl/
 	@make clean --no-print-directory -C graphic/libcaca/
 	@make clean --no-print-directory -C games/nibler/
-	# @make clean --no-print-directory -C games/solarfox/
+	@make clean --no-print-directory -C games/solarfox/
 
 fclean:
 	@make fclean --no-print-directory -C main_core
@@ -29,7 +29,7 @@ fclean:
 	@make fclean --no-print-directory -C graphic/sdl/
 	@make fclean --no-print-directory -C graphic/libcaca/
 	@make fclean --no-print-directory -C games/nibler/
-	# @make fclean --no-print-directory -C games/solarfox/
+	@make fclean --no-print-directory -C games/solarfox/
 
 re:
 	@make re  --no-print-directory -C main_core
@@ -37,14 +37,14 @@ re:
 	@make re --no-print-directory -C graphic/sdl/
 	@make re --no-print-directory -C graphic/libcaca/
 	@make re --no-print-directory -C games/nibler/
-	# @make re --no-print-directory -C games/solarfox/
+	@make re --no-print-directory -C games/solarfox/
 
 core:
 	@make --no-print-directory -C main_core
 
 games:
 	@make --no-print-directory -C games/nibler/
-	# @make --no-print-directory -C games/solarfox/
+	@make --no-print-directory -C games/solarfox/
 
 
 graphicals:
