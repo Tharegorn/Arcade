@@ -17,7 +17,7 @@ NAME	=   arcade
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	@g++ $(OBJ) -o ../$(NAME) -ldl -lncurses -fvisibility=hidden
+	@g++ $(OBJ) -o ../$(NAME) -ldl -fvisibility=hidden
 
 %.o:	%.cpp
 	g++ -c $(CFLAGS) $< -o $@
