@@ -28,6 +28,8 @@ class Core
         void LibLoader();
         void GameLoader();
         void init();
+        void set_name(char c);
+        std::string get_name() {return name;}
         int keys(int key);
 
     enum keys {
@@ -56,5 +58,6 @@ class Core
         IGraphicLib *GraphicLib;
         IGames *Game;
         state act;
+        std::string name;
 };
 #endif /* !ARCADE_HPP_ */

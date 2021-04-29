@@ -23,8 +23,7 @@ class sdl: IGraphicLib
         void printText(int x, int y, std::string text);
         void refresh();
         void printbox(int x, int y, int h, int w);
-        void drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act);
-        void setName(char c);
+        void drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act, std::string name);
         char libType() { return ('L');}
 
     private:
@@ -32,5 +31,4 @@ class sdl: IGraphicLib
         SDL_Renderer *rend;
         TTF_Font *font;
         SDL_Texture *back;
-        std::string name;
 };

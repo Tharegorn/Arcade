@@ -67,7 +67,6 @@ void Core::check_files()
         auto name = str;
         name.erase(0, 7);
         name.erase(name.length() - 3, 3);
-        std::cout << name << std::endl;
         if (name == "ncurses" || name == "sdl2" || name == "libcaca" || name == "sfml")
             libraries.push_back(name);
         else
@@ -107,14 +106,14 @@ void Core::init()
 {
     while (1) {
         if (act == INIT)
-            GraphicLib->drawMenu(libraries, games, curr, actualgame);
+            GraphicLib->drawMenu(libraries, games, curr, actualgame, name);
         else {
             GraphicLib->clearwin();
-            if (Game->run(GraphicLib) == -84) {
+            if (Game->run(GraphicLib, name) == -84) {
                 delete(Game);
                 act = INIT;
                 GraphicLib->clearwin();
-                GraphicLib->drawMenu(libraries, games, curr, actualgame);
+                GraphicLib->drawMenu(libraries, games, curr, actualgame, name);
             }
         }
        GraphicLib->refresh();
@@ -170,9 +169,9 @@ int Core::keys(int key)
     }
     if (act == INIT) {
         if (key >= 'a' && key <= 'z')
-            GraphicLib->setName(key);
+            set_name(key);
         if (key == 127 || key == BACKSPACE)
-            GraphicLib->setName('0');
+            set_name('0');
     } else {
         if (key == 'd')
             Game->getInput(4);
@@ -184,4 +183,13 @@ int Core::keys(int key)
             Game->getInput(1);
     }
     return 0;
+}
+
+void Core::set_name(char c)
+{
+    if (c == '0') {
+        if (strlen(this->name.c_str()) > 0)
+            this->name.pop_back();
+    } else
+        this->name.push_back(c);
 }

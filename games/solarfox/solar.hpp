@@ -18,7 +18,7 @@ public:
     ~solar() override;
     void mapborder(IGraphicLib *GraphicLib);
     void drawFood(IGraphicLib *GraphicLib, int x, int y);
-    int run(IGraphicLib *GraphicLib);
+    int run(IGraphicLib *GraphicLib, std::string name);
     void getInput(int a);
     char libType() { return ('G');}
 

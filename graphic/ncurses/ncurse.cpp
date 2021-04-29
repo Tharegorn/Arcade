@@ -56,7 +56,7 @@ void ncurse::printbox(int h, int w, int x, int y)
     // wrefresh(win);
 }
 
-void ncurse::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act)
+void ncurse::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act, std::string name)
 {
     int i = 2;
 
@@ -88,15 +88,6 @@ void ncurse::drawMenu(std::vector<std::string> libraries, std::vector<std::strin
     this->printText(0, 18,"5 : Restart Game");
     this->printText(0, 19,"6 : Return to menu");
     this->printText(0, 20,"7 : Exit Arcade");
-}
-
-void ncurse::setName(char c)
-{
-    if (c == '0') {
-        if (strlen(this->name.c_str()) > 0)
-            this->name.pop_back();
-    } else
-        this->name.push_back(c);
 }
 
 extern "C"

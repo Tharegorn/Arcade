@@ -30,8 +30,9 @@ void solar::drawFood(IGraphicLib *GraphicLib, int x, int y)
 
 }
 
-int solar::run(IGraphicLib *GraphicLib)
+int solar::run(IGraphicLib *GraphicLib, std::string name)
 {
+    (void)name;
     mapborder(GraphicLib);
     GraphicLib->printText(fox[0]->x, fox[0]->y, fox[0]->symbol);
 

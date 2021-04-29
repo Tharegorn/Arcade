@@ -76,7 +76,7 @@ void libcaca::printbox(int h, int w, int x, int y)
         }
     }
 }
-void libcaca::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act)
+void libcaca::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act, std::string name)
 {
     this->clearwin();
     int a = 5;
@@ -111,15 +111,6 @@ void libcaca::drawMenu(std::vector<std::string> libraries, std::vector<std::stri
     this->printText(8, 24,"F5 : Restart Game");
     this->printText(8, 25,"F6 : Return to menu");
     this->printText(8, 26,"F7 : Exit Arcade");
-}
-
-void libcaca::setName(char c)
-{
-    if (c == '0') {
-        if (strlen(this->name.c_str()) > 0)
-            this->name.pop_back();
-    } else
-        this->name.push_back(c);
 }
 
 extern "C"

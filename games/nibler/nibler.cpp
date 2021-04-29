@@ -59,6 +59,7 @@ void nibler::getInput(int a)
 int nibler::mooveSnake(IGraphicLib *GraphicLib)
 {
     if (snake[0]->x == pfood->x && snake[0]->y == pfood->y) {
+        score++;
         int nx = snake[snake.size() - 1]->x;
         int ny = snake[snake.size() - 1]->y;
         delete (pfood);
@@ -99,26 +100,46 @@ void nibler::init(IGraphicLib *GraphicLib)
         }
     }
 }
-int nibler::run(IGraphicLib *GraphicLib)
+
+void nibler::draw_game(IGraphicLib *GraphicLib, std::string name)
 {
-    GraphicLib->clearwin();
-    if (food == false)
-    {
+    if (food == false) {
         init(GraphicLib);
         pfood = new player(rand() % (this->w - 1) + (this->x + 1), rand() % (this->h - 1) + (this->y + 1), "F");
         food = true;
     }
     mapborder(GraphicLib);
     drawSnake(GraphicLib);
-    if (mooveSnake(GraphicLib) == -84)
-        return -84;
+    GraphicLib->printText(40, 10, "Score : " + std::to_string(score));
+    GraphicLib->printText(40, 15, "Name : " + name);
     drawFood(GraphicLib, pfood->x, pfood->y);
+}
+
+void nibler::highscore(std::string name)
+{
+    std::fstream my_file;
+
+    if (name == "")
+        name = "No_name";
+    my_file.open("./assets/nibler_score.txt", std::ios::app);
+    my_file << name + " " + std::to_string(score) + "\n";
+    my_file.close();
+}
+int nibler::run(IGraphicLib *GraphicLib, std::string name)
+{
+    draw_game(GraphicLib, name);
+    if (mooveSnake(GraphicLib) == -84) {
+        highscore(name);
+        free(pfood);
+        for (auto &&i: snake)
+            free(i);
+        return -84;
+    }
     // clk = clock() - clk;
     // if ((((double)clk) / CLOCKS_PER_SEC) == 0.1) {
     //     getInput(dir);
     //     clk = clock();
     // }
-    GraphicLib->refresh();
     return (0);
 }
 

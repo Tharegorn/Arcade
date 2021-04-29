@@ -107,7 +107,7 @@ void sdl::refresh()
     SDL_RenderPresent(rend);
 }
 
-void sdl::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act)
+void sdl::drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act, std::string name)
 {
     this->clearwin();
     int a = 15;
@@ -147,14 +147,6 @@ void sdl::drawMenu(std::vector<std::string> libraries, std::vector<std::string> 
     this->refresh();
 }
 
-void sdl::setName(char c)
-{
-    if (c == '0') {
-        if (strlen(this->name.c_str()) > 0)
-            this->name.pop_back();
-    } else
-        this->name.push_back(c);
-}
 extern "C"
 {
     void *Launch()
