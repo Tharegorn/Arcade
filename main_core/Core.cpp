@@ -174,13 +174,13 @@ int Core::keys(int key)
             set_name('0');
     } else {
         if (key == 'd')
-            Game->getInput(4);
+            Game->set_input(4);
         if (key == 's')
-            Game->getInput(2);
+            Game->set_input(2);
         if (key == 'q')
-            Game->getInput(3);
+            Game->set_input(3);
         if (key == 'z')
-            Game->getInput(1);
+            Game->set_input(1);
     }
     return 0;
 }

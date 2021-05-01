@@ -28,6 +28,12 @@ void nibler::drawSnake(IGraphicLib *GraphicLib)
         GraphicLib->printText(i->x, i->y, i->symbol);
 }
 
+
+void nibler::set_input(int a)
+{
+    dir = a;
+}
+
 void nibler::getInput(int a)
 {
     int nx = 0;
@@ -60,6 +66,10 @@ int nibler::mooveSnake(IGraphicLib *GraphicLib)
 {
     if (snake[0]->x == pfood->x && snake[0]->y == pfood->y) {
         score++;
+        if (res - 50 < 250)
+            res = 250;
+        else
+            res -= 50;
         int nx = snake[snake.size() - 1]->x;
         int ny = snake[snake.size() - 1]->y;
         delete (pfood);
@@ -127,6 +137,8 @@ void nibler::highscore(std::string name)
 }
 int nibler::run(IGraphicLib *GraphicLib, std::string name)
 {
+    std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
+    auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->latest_clock).count();
     draw_game(GraphicLib, name);
     if (mooveSnake(GraphicLib) == -84) {
         highscore(name);
@@ -135,11 +147,11 @@ int nibler::run(IGraphicLib *GraphicLib, std::string name)
             free(i);
         return -84;
     }
-    // clk = clock() - clk;
-    // if ((((double)clk) / CLOCKS_PER_SEC) == 0.1) {
-    //     getInput(dir);
-    //     clk = clock();
-    // }
+    if (res <= delta) {
+        this->latest_clock = now;
+        getInput(dir);
+    }
+
     return (0);
 }
 

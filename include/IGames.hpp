@@ -34,7 +34,7 @@ class IGames {
     public:
         virtual ~IGames() = default;
         virtual int run(IGraphicLib *GraphicLib, std::string name) = 0;
-        virtual void getInput(int a) = 0;
+        virtual void set_input(int a) = 0;
         virtual char libType() = 0;
 
     protected:

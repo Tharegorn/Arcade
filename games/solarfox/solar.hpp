@@ -20,6 +20,7 @@ public:
     void drawFood(IGraphicLib *GraphicLib, int x, int y);
     int run(IGraphicLib *GraphicLib, std::string name);
     void getInput(int a);
+    void set_input(int a);
     char libType() { return ('G');}
 
 

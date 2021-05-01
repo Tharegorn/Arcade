@@ -11,6 +11,8 @@
 #include "../../include/IGames.hpp"
 #include <fstream>
 #include <time.h>
+#include <chrono>
+
 
 class nibler : IGames
 {
@@ -23,6 +25,7 @@ public:
     void drawSnake(IGraphicLib *GraphicLib);
     int mooveSnake(IGraphicLib *GraphicLib);
     void getInput(int a);
+    void set_input(int a);
     void draw_game(IGraphicLib *GraphicLib, std::string name);
     void highscore(std::string name);
     void init(IGraphicLib *GraphicLib);
@@ -39,9 +42,10 @@ private:
     int score = 0;
     bool food = false;
     int dir = 4;
+    int64_t res = 500;
     std::vector<player *> snake;
     player *pfood;
-    clock_t clk;
+    std::chrono::high_resolution_clock::time_point latest_clock = std::chrono::high_resolution_clock::now();
 };
 
 #endif /* !NIBLER_HPP_ */

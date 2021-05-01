@@ -30,6 +30,11 @@ void solar::drawFood(IGraphicLib *GraphicLib, int x, int y)
 
 }
 
+void solar::set_input(int a)
+{
+    a++;
+}
+
 int solar::run(IGraphicLib *GraphicLib, std::string name)
 {
     (void)name;
