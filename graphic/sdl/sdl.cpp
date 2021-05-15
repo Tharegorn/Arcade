@@ -36,31 +36,39 @@ sdl::~sdl()
 int sdl::getKey()
 {
     SDL_Event event;
+    std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
+    auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->timer).count();
 
     if (SDL_PollEvent(&event) != 0)
     {
-        if (event.type == SDL_QUIT)
-            return ('x');
-        else {
-            auto key = event.key.keysym.sym;
-            if (key == SDLK_1)
-                return ('1');
-            if (key == SDLK_2)
-                return ('2');
-            if (key == SDLK_3)
-                return ('3');
-            if (key == SDLK_4)
-                return ('4');
-            if (key == SDLK_5)
-                return ('5');
-            if (key == SDLK_6)
-                return ('6');
-            if (key == SDLK_7)
-                return ('7');
-            if (key >= 94 && key <= 122)
-                return key;
-            if (key == SDLK_BACKSPACE)
-                return ('8');
+        if (time <= delta)
+        {
+
+            if (event.type == SDL_QUIT)
+                return ('x');
+            else
+            {
+                auto key = event.key.keysym.sym;
+                if (key == SDLK_1)
+                    return ('1');
+                if (key == SDLK_2)
+                    return ('2');
+                if (key == SDLK_3)
+                    return ('3');
+                if (key == SDLK_4)
+                    return ('4');
+                if (key == SDLK_5)
+                    return ('5');
+                if (key == SDLK_6)
+                    return ('6');
+                if (key == SDLK_7)
+                    return ('7');
+                if (key >= 94 && key <= 122)
+                    return key;
+                if (key == SDLK_BACKSPACE)
+                    return ('8');
+            }
+            timer = now;
         }
     }
     return 0;
@@ -99,11 +107,11 @@ void sdl::printbox(int h, int w, int x, int y)
     r.y = y;
     r.w = h * 6;
     r.h = w * 6;
-    SDL_RenderDrawRect( rend, &r );
+    SDL_RenderDrawRect(rend, &r);
 }
 void sdl::refresh()
 {
-    SDL_SetRenderDrawColor( rend, 0xFF, 0x00, 0x00, 0xFF );
+    SDL_SetRenderDrawColor(rend, 0xFF, 0x00, 0x00, 0xFF);
     SDL_RenderPresent(rend);
 }
 
@@ -130,7 +138,7 @@ void sdl::drawMenu(std::vector<std::string> libraries, std::vector<std::string> 
     a = 15;
     for (const auto x : games)
     {
-        if (ctt -2 == act)
+        if (ctt - 2 == act)
             this->printText(50, a, "> " + x);
         else
             this->printText(50, a, x);
@@ -138,12 +146,12 @@ void sdl::drawMenu(std::vector<std::string> libraries, std::vector<std::string> 
         ctt++;
     }
     ctt = 2;
-    this->printText(8, 130,"Keys:");
-    this->printText(8, 135,"1 and 2 : switch to next or previous lib");
-    this->printText(8, 140,"3 and 4 : switch to next or previous game");
-    this->printText(8, 145,"5 : Restart Game");
-    this->printText(8, 150,"6 : Return to menu");
-    this->printText(8, 155,"7 : Exit Arcade");
+    this->printText(8, 130, "Keys:");
+    this->printText(8, 135, "1 and 2 : switch to next or previous lib");
+    this->printText(8, 140, "3 and 4 : switch to next or previous game");
+    this->printText(8, 145, "5 : Restart Game");
+    this->printText(8, 150, "6 : Return to menu");
+    this->printText(8, 155, "7 : Exit Arcade");
     this->refresh();
 }
 

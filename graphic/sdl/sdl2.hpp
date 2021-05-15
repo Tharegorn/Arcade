@@ -12,6 +12,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <map>
+#include <time.h>
+#include <chrono>
+#include <iomanip>
 
 class sdl: IGraphicLib
 {
@@ -31,4 +34,7 @@ class sdl: IGraphicLib
         SDL_Renderer *rend;
         TTF_Font *font;
         SDL_Texture *back;
+        std::chrono::high_resolution_clock::time_point timer = std::chrono::high_resolution_clock::now();
+        int64_t time = 100;
+
 };

@@ -47,6 +47,8 @@ int libcaca::getKey()
             return (key);
         if (key == CACA_KEY_BACKSPACE)
             return '8';
+        if (key == ' ')
+            return key;
     }
     return 0;
 }
