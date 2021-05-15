@@ -73,15 +73,15 @@ int nibler::mooveSnake(IGraphicLib *GraphicLib)
         int nx = snake[snake.size() - 1]->x;
         int ny = snake[snake.size() - 1]->y;
         delete (pfood);
-        pfood = new player(rand() % 19 + 11, rand() % 19 + 11, "F");
+        pfood = new Player(rand() % 19 + 11, rand() % 19 + 11, "F");
         if (dir == 1)
-            snake.push_back(new player(nx, ny + 1, "X"));
+            snake.push_back(new Player(nx, ny + 1, "X"));
         if (dir == 2)
-            snake.push_back(new player(nx, ny - 1, "X"));
+            snake.push_back(new Player(nx, ny - 1, "X"));
         if (dir == 3)
-            snake.push_back(new player(nx + 1, ny, "X"));
+            snake.push_back(new Player(nx + 1, ny, "X"));
         if (dir == 4)
-            snake.push_back(new player(nx - 1, ny, "X"));
+            snake.push_back(new Player(nx - 1, ny, "X"));
     }
     for (int i = snake.size() - 1; i != 0; i--)
     {
@@ -97,15 +97,15 @@ int nibler::mooveSnake(IGraphicLib *GraphicLib)
 
 void nibler::init(IGraphicLib *GraphicLib)
 {
-    for (int i = 0; i != 4; i++) {
+    for (int i = 0; i != 30; i++) {
         if (i == 0)
         {
-            player *p = new player((w / 2) - i, (h / 2), "0");
+            Player *p = new Player((w / 2) - i, (h / 2), "0");
             snake.push_back(p);
         }
         else
         {
-            player *p = new player((w / 2) - i, (h / 2), "X");
+            Player *p = new Player((w / 2) - i, (h / 2), "X");
             snake.push_back(p);
         }
     }
@@ -115,7 +115,7 @@ void nibler::draw_game(IGraphicLib *GraphicLib, std::string name)
 {
     if (food == false) {
         init(GraphicLib);
-        pfood = new player(rand() % (this->w - 1) + (this->x + 1), rand() % (this->h - 1) + (this->y + 1), "F");
+        pfood = new Player(rand() % (this->w - 1) + (this->x + 1), rand() % (this->h - 1) + (this->y + 1), "F");
         food = true;
     }
     mapborder(GraphicLib);

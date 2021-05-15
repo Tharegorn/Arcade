@@ -21,7 +21,7 @@ Core::Core(std::string path)
     for (const auto x : games)
         Listgames.push_back(new Library("lib/arcade_" + x + ".so"));
     for (const auto x : libraries) {
-        if ("lib/arcace_" + x + ".so" == path) {
+        if ("lib/arcade_" + x + ".so" == path) {
             curr = ite;
             current = true;
         }
@@ -67,6 +67,7 @@ void Core::check_files()
         auto name = str;
         name.erase(0, 7);
         name.erase(name.length() - 3, 3);
+        std::cout << name << std::endl;
         if (name == "ncurses" || name == "sdl2" || name == "libcaca" || name == "sfml")
             libraries.push_back(name);
         else
@@ -124,7 +125,7 @@ void Core::init()
 
 int Core::keys(int key)
 {
-    if (key == NEXT_LIB || key == 169) {
+    if (key == NEXT_LIB || key == 38) {
        delete(GraphicLib);
         if ((size_t)curr + 1 < Listlib.size())
             curr++;
@@ -132,7 +133,7 @@ int Core::keys(int key)
             curr = 0;
         this->LibLoader();
     }
-    if (key == PREVIOUS_LIB || key == 38) {
+    if (key == PREVIOUS_LIB || key == 169) {
        delete(GraphicLib);
         if (curr - 1 == -1)
             curr = maxlib;
@@ -140,21 +141,26 @@ int Core::keys(int key)
             curr--;
        this->LibLoader();
     }
-    if (key == NEXT_GAME || key == 39) {
-       delete(Game);
-        if ((size_t)actualgame + 1 < Listgames.size())
+    if (key == NEXT_GAME || key == 34) {
+        if (gamestate == true)
+            delete(Game);
+        if ((size_t)actualgame + 1< Listgames.size())
             actualgame++;
         else
             actualgame = 0;
         this->GameLoader();
+        gamestate = true;
     }
-    if (key == PREVIOUS_GAME || key == 36) {
-       delete(Game);
+    if (key == PREVIOUS_GAME || key == 39) {
+        if (gamestate == true)
+            delete(Game);
         if (actualgame - 1 == -1)
             actualgame = Listgames.size() - 1;
         else
             actualgame--;
-       this->GameLoader();
+        this->GameLoader();
+        gamestate = true;
+
     }
     if (key == RESTART || key == 40) {
         act = GAME;

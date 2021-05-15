@@ -70,9 +70,9 @@ void libcaca::printbox(int h, int w, int x, int y)
     for (int i = x; i <= w; i++) {
         for (int j = y; j <= h; j++) {
             if (i == x || i == w)
-                printText(i, j, "-");
+                printText(i, j, " ");
             if (j == y || j == h)
-                printText(i, j, "|");
+                printText(i, j, " ");
         }
     }
 }

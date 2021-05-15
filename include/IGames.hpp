@@ -13,13 +13,15 @@
 #include <map>
 #include <vector>
 #include "IGraphicLib.hpp"
-#include <time.h>
 #include <iomanip>
+#include <time.h>
+#include <chrono>
+#include <fstream>
 
-class player
+class Player
 {
     public:
-        player(int x, int y, std::string symbol)
+        Player(int x, int y, std::string symbol)
         {
             this->x = x;
             this->y = y;

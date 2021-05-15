@@ -9,9 +9,6 @@
 #define NIBLER_HPP_
 
 #include "../../include/IGames.hpp"
-#include <fstream>
-#include <time.h>
-#include <chrono>
 
 
 class nibler : IGames
@@ -43,8 +40,8 @@ private:
     bool food = false;
     int dir = 4;
     int64_t res = 500;
-    std::vector<player *> snake;
-    player *pfood;
+    std::vector<Player *> snake;
+    Player *pfood;
     std::chrono::high_resolution_clock::time_point latest_clock = std::chrono::high_resolution_clock::now();
 };
 

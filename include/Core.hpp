@@ -50,6 +50,7 @@ class Core
         int curr;
         int maxlib;
         int actualgame;
+        bool gamestate = false;
         std::vector<char *> files;
         std::vector<std::string> libraries;
         std::vector<std::string> games;

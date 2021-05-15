@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC     =   solar.cpp
+SRC     =   solar.cpp \
+			mob.cpp
 
 CFLAGS	+=	-fPIC -Wextra -Wall -Werror
 

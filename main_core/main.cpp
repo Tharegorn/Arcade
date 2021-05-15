@@ -40,7 +40,7 @@ int main( int ac, char **av)
         std::cout << "USAGE : ./arcade lib/lib_arcade.so" << std::endl;
         return -1;
     }
-    Core *test = new Core(av[1]);
-    test->init();
+    Core core(av[1]);
+    core.init();
     return (0);
 }

@@ -12,6 +12,7 @@ ncurse::ncurse()
     win = initscr();
     curs_set(FALSE);
     noecho();
+    timeout(10);
 }
 
 ncurse::~ncurse()
