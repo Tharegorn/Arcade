@@ -97,7 +97,7 @@ int nibler::mooveSnake(IGraphicLib *GraphicLib)
 
 void nibler::init(IGraphicLib *GraphicLib)
 {
-    for (int i = 0; i != 30; i++) {
+    for (int i = 0; i != 4; i++) {
         if (i == 0)
         {
             Player *p = new Player((w / 2) - i, (h / 2), "0");
