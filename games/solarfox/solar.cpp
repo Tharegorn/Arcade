@@ -14,6 +14,7 @@ solar::solar()
     h = 30;
     w = 30;
     fox = new Player(15, 15, "x");
+    shoot = new Player(10, 10, "O");
 }
 
 solar::~solar()
@@ -37,26 +38,77 @@ int solar::moove_fox(IGraphicLib *GraphicLib)
 
 int solar::check_fox_moove(IGraphicLib *GrapicLib)
 {
-    if (fox->x >= 30 || fox->x <= 10 || fox->y >= 30 || fox->y <= 1)
+    if (fox->x >= 30 || fox->x <= 10 || fox->y >= 30 || fox->y <= 10)
         return 1;
-    for (auto &&i : mob) {
+    for (auto &&i : mob)
+    {
         if (i->get_shot_pos()[0] == fox->x && i->get_shot_pos()[1] == fox->y)
             return 1;
     }
     return 0;
 }
-void solar::mapborder(IGraphicLib *GraphicLib)
+void solar::mapborder(IGraphicLib *GraphicLib, std::string name)
 {
     GraphicLib->printbox(h, w, x, y);
+    GraphicLib->printText(35, 15, "Name : " + name);
+    GraphicLib->printText(35, 20, "Score : " + std::to_string(score));
 }
 
 void solar::drawFood(IGraphicLib *GraphicLib, int x, int y)
 {
 }
 
+void solar::check_move_shot()
+{
+    for (auto &&i : mob) {
+        if (shoot->x == i->get_shot_pos()[0] && shoot->y == i->get_shot_pos()[1])  {
+            shoot_state = false;
+            i->set_shot_state(false);
+        }
+    }
+}
+
+void solar::init_shoot()
+{
+    if (shoot_state == false)
+    {
+        shoot_state = true;
+        moove_shot = 0;
+        shoot_dir = dir;
+        printf("%d\n", shoot_dir);
+        if (shoot_dir == 1)
+        {
+            shoot->x = fox->x;
+            shoot->y = fox->y - 2;
+            shoot->symbol = "O";
+        }
+        if (shoot_dir == 2)
+        {
+            shoot->x = fox->x;
+            shoot->y = fox->y + 2;
+            shoot->symbol = "O";
+        }
+        if (shoot_dir == 3)
+        {
+            shoot->x = fox->x - 2;
+            shoot->y = fox->y;
+            shoot->symbol = "O";
+        }
+        if (shoot_dir == 4)
+        {
+            shoot->x = fox->x + 2;
+            shoot->y = fox->y;
+            shoot->symbol = "O";
+        }
+    }
+}
+
 void solar::set_input(int a)
 {
-    dir = a;
+    if (a == 5)
+        init_shoot();
+    else
+        dir = a;
     if (dir == 1)
         fox->y -= 1;
     if (dir == 2)
@@ -179,9 +231,9 @@ int solar::run(IGraphicLib *GraphicLib, std::string name)
     std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
     auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->latest_clock).count();
     auto delta_two = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->shooter).count();
-    (void)name;
     if (init == false)
         Init(GraphicLib);
+    check_move_shot();
     if (mob_move <= delta)
     {
         moove_mob(GraphicLib);
@@ -216,28 +268,42 @@ int solar::run(IGraphicLib *GraphicLib, std::string name)
                     mob[i]->set_shot_state(true);
                 }
             }
-        this->latest_clock = now;
+            this->latest_clock = now;
+        }
     }
     if (shoot_time <= delta_two)
     {
-
+        moove_shot += 1;
+        if (moove_shot > 2)
+            shoot_state = false;
+        else
+        {
+            if (shoot_dir == 1)
+                shoot->y -= 1;
+            if (shoot_dir == 2)
+                shoot->y += 1;
+            if (shoot_dir == 3)
+                shoot->x -= 1;
+            if (shoot_dir == 4)
+                shoot->x += 1;
         }
         this->shooter = now;
     }
-    mapborder(GraphicLib);
+    mapborder(GraphicLib, name);
     for (auto &&i : mob)
     {
         if (i->get_shot_state() == true)
             GraphicLib->printText(i->get_shot_pos()[0], i->get_shot_pos()[1], i->get_shot_symbol().c_str());
         GraphicLib->printText(i->get_pos()[0], i->get_pos()[1], i->get_symbol().c_str());
     }
+    if (shoot_state == true)
+        GraphicLib->printText(shoot->x, shoot->y, shoot->symbol);
     GraphicLib->printText(fox->x, fox->y, fox->symbol);
     return 0;
 }
 
 void solar::getInput(int a)
 {
-    
 }
 
 extern "C"

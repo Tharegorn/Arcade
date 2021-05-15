@@ -20,8 +20,10 @@ Core::Core(std::string path)
         Listlib.push_back(new Library("lib/arcade_" + x + ".so"));
     for (const auto x : games)
         Listgames.push_back(new Library("lib/arcade_" + x + ".so"));
-    for (const auto x : libraries) {
-        if ("lib/arcade_" + x + ".so" == path) {
+    for (const auto x : libraries)
+    {
+        if ("lib/arcade_" + x + ".so" == path)
+        {
             curr = ite;
             current = true;
         }
@@ -30,7 +32,8 @@ Core::Core(std::string path)
 
     maxlib = ite - 1;
     actualgame = 0;
-    if (!current) {
+    if (!current)
+    {
         Listlib.push_back(new Library(path));
         curr = Listlib.size() - 1;
     }
@@ -44,25 +47,32 @@ Core::~Core()
 
 void Core::check_files()
 {
-    DIR *dir; struct dirent *diread;
+    DIR *dir;
+    struct dirent *diread;
     int t = 0;
 
-    if ((dir = opendir("./lib/")) != nullptr) {
-        while ((diread = readdir(dir)) != nullptr) {
+    if ((dir = opendir("./lib/")) != nullptr)
+    {
+        while ((diread = readdir(dir)) != nullptr)
+        {
             if (strcmp(diread->d_name, ".") && strcmp(diread->d_name, "..") && strcmp(diread->d_name, ".gitignore"))
-                    files.push_back(diread->d_name);
+                files.push_back(diread->d_name);
         }
-        closedir (dir);
-    } else
-        perror ("opendir");
-    for (auto i : files){
+        closedir(dir);
+    }
+    else
+        perror("opendir");
+    for (auto i : files)
+    {
         t++;
         std::string str(i);
-        if (str.find(".so") && str.find("arcade_")) {
-                files.erase(files.begin() + t - 1);
+        if (str.find(".so") && str.find("arcade_"))
+        {
+            files.erase(files.begin() + t - 1);
         }
     }
-    for (auto i : files) {
+    for (auto i : files)
+    {
         std::string str(i);
         auto name = str;
         name.erase(0, 7);
@@ -80,13 +90,13 @@ void Core::LibLoader()
     function lib;
     char *err;
 
-    lib = (function) dlsym(Listlib[curr]->get_open(), "Launch");
-    if ((err = dlerror()) != nullptr) {
+    lib = (function)dlsym(Listlib[curr]->get_open(), "Launch");
+    if ((err = dlerror()) != nullptr)
+    {
         std::cerr << err << std::endl;
         exit(84);
     }
     GraphicLib = static_cast<IGraphicLib *>(lib());
-
 }
 
 void Core::GameLoader()
@@ -94,91 +104,105 @@ void Core::GameLoader()
     function lib;
     char *err;
 
-    lib = (function) dlsym(Listgames[actualgame]->get_open(), "Launch");
-    if ((err = dlerror()) != nullptr) {
+    lib = (function)dlsym(Listgames[actualgame]->get_open(), "Launch");
+    if ((err = dlerror()) != nullptr)
+    {
         std::cerr << err << std::endl;
         exit(84);
     }
     Game = static_cast<IGames *>(lib());
-
 }
 
 void Core::init()
 {
-    while (1) {
+
+    while (1)
+    {
         if (act == INIT)
             GraphicLib->drawMenu(libraries, games, curr, actualgame, name);
-        else {
+        else
+        {
             GraphicLib->clearwin();
-            if (Game->run(GraphicLib, name) == -84) {
-                delete(Game);
+            if (Game->run(GraphicLib, name) == -84)
+            {
+                delete (Game);
                 act = INIT;
                 GraphicLib->clearwin();
                 GraphicLib->drawMenu(libraries, games, curr, actualgame, name);
             }
         }
-       GraphicLib->refresh();
-       if (keys(GraphicLib->getKey()) == 84)
-          break;
+        GraphicLib->refresh();
+        if (keys(GraphicLib->getKey()) == 84)
+            break;
     }
 }
 
 int Core::keys(int key)
 {
-    if (key == NEXT_LIB || key == 38) {
-       delete(GraphicLib);
+    if (key == NEXT_LIB || key == 38)
+    {
+        delete (GraphicLib);
         if ((size_t)curr + 1 < Listlib.size())
             curr++;
         else
             curr = 0;
         this->LibLoader();
     }
-    if (key == PREVIOUS_LIB || key == 169) {
-       delete(GraphicLib);
+    if (key == PREVIOUS_LIB || key == 169)
+    {
+        delete (GraphicLib);
         if (curr - 1 == -1)
             curr = maxlib;
         else
             curr--;
-       this->LibLoader();
+        this->LibLoader();
     }
-    if (key == NEXT_GAME || key == 34) {
+    if (key == NEXT_GAME || key == 34)
+    {
         if (gamestate == true)
-            delete(Game);
-        if ((size_t)actualgame + 1< Listgames.size())
+            delete (Game);
+        if ((size_t)actualgame + 1 < Listgames.size())
             actualgame++;
         else
             actualgame = 0;
         this->GameLoader();
         gamestate = true;
     }
-    if (key == PREVIOUS_GAME || key == 39) {
+    if (key == PREVIOUS_GAME || key == 39)
+    {
         if (gamestate == true)
-            delete(Game);
+            delete (Game);
         if (actualgame - 1 == -1)
             actualgame = Listgames.size() - 1;
         else
             actualgame--;
         this->GameLoader();
         gamestate = true;
-
     }
-    if (key == RESTART || key == 40) {
+    if (key == RESTART || key == 40)
+    {
         act = GAME;
         this->GameLoader();
     }
     if (key == MENU || key == 45)
         act = INIT;
     //restart : 40
-    if (key == EXIT || key == 168) {
-       delete(GraphicLib);
+    if (key == EXIT || key == 168)
+    {
+        delete (GraphicLib);
         return (84);
     }
-    if (act == INIT) {
+    if (act == INIT)
+    {
         if (key >= 'a' && key <= 'z')
             set_name(key);
         if (key == 127 || key == BACKSPACE)
             set_name('0');
-    } else {
+    }
+    else
+    {
+        if (key == ' ')
+            Game->set_input(5);
         if (key == 'd')
             Game->set_input(4);
         if (key == 's')
@@ -193,9 +217,11 @@ int Core::keys(int key)
 
 void Core::set_name(char c)
 {
-    if (c == '0') {
+    if (c == '0')
+    {
         if (strlen(this->name.c_str()) > 0)
             this->name.pop_back();
-    } else
+    }
+    else
         this->name.push_back(c);
 }

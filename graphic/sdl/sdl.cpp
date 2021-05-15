@@ -21,7 +21,7 @@ sdl::sdl()
     rend = SDL_CreateRenderer(win, 0, SDL_RENDERER_ACCELERATED);
     if (rend == nullptr)
         exit(EXIT_FAILURE);
-    font = TTF_OpenFont("assets/ARCADE.TTF", 180);
+    font = TTF_OpenFont("assets/ARCADE.TTF", 50);
     back = IMG_LoadTexture(rend,
                            "assets/test.png");
 }
@@ -91,7 +91,7 @@ void sdl::printText(int x, int y, std::string text)
     SDL_Rect Message_rect;
     Message_rect.y = y * 5;
     Message_rect.x = x * 5;
-    Message_rect.w = text.length() * 15;
+    Message_rect.w = text.length() * 10;
     Message_rect.h = 24;
     SDL_RenderCopy(rend, Message, NULL, &Message_rect);
     SDL_FreeSurface(surfaceMessage);
@@ -105,8 +105,8 @@ void sdl::printbox(int h, int w, int x, int y)
     SDL_Rect r;
     r.x = x;
     r.y = y;
-    r.w = h * 6;
-    r.h = w * 6;
+    r.w = h * 5;
+    r.h = w * 5;
     SDL_RenderDrawRect(rend, &r);
 }
 void sdl::refresh()

@@ -42,7 +42,7 @@ class solar : IGames
 public:
     solar();
     ~solar() override;
-    void mapborder(IGraphicLib *GraphicLib);
+    void mapborder(IGraphicLib *GraphicLib, std::string name);
     void drawFood(IGraphicLib *GraphicLib, int x, int y);
     int run(IGraphicLib *GraphicLib, std::string name);
     void getInput(int a);
@@ -51,7 +51,9 @@ public:
     void Init(IGraphicLib *GraphicLib);
     char libType() { return ('G'); }
     int moove_fox(IGraphicLib *GraphicLib);
+    void init_shoot();
     int check_fox_moove(IGraphicLib *GraphicLib);
+    void check_move_shot();
 
 private:
     int x;
@@ -60,10 +62,15 @@ private:
     int w;
     bool init = false;
     Player *fox;
+    Player *shoot;
+    bool shoot_state = false;
+    int shoot_dir;
+    int moove_shot = 0;
     std::vector<Mob *> mob;
     int dir = 2;
-    int64_t mob_move = 500;
-    int64_t shoot_time = 2000;
+    int score = 0;
+    int64_t mob_move = 700;
+    int64_t shoot_time = 500;
     std::chrono::high_resolution_clock::time_point latest_clock = std::chrono::high_resolution_clock::now();
     std::chrono::high_resolution_clock::time_point shooter = std::chrono::high_resolution_clock::now();
 };
