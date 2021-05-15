@@ -16,12 +16,22 @@ public:
     Mob(){}
     ~Mob();
     void set_pos(int x, int y, std::string c);
+    void set_shot_pos(int x, int y, std::string c);
     std::string get_move() {return move;}
+    std::string get_shot_move() {return shot_move;}
     void set_move(std::string str) {move = str;}
+    void set_shot_move(std::string str) {shot_move = str;}
     std::vector<int> get_pos() {return pos;}
+    std::vector<int> get_shot_pos() {return shot_pos;}
     std::string get_symbol() {return symbol;}
-
+    std::string get_shot_symbol() {return shot_symbol;}
+    bool get_shot_state() { return shot_state;}
+    void set_shot_state(bool state) {shot_state = state;}
 private:
+    std::vector<int> shot_pos;
+    std::string shot_move;
+    std::string shot_symbol;
+    bool shot_state = false;
     std::vector<int> pos;
     std::string symbol;
     std::string move;
@@ -40,6 +50,8 @@ public:
     void moove_mob(IGraphicLib *GraphicLib);
     void Init(IGraphicLib *GraphicLib);
     char libType() { return ('G'); }
+    int moove_fox(IGraphicLib *GraphicLib);
+    int check_fox_moove(IGraphicLib *GraphicLib);
 
 private:
     int x;
@@ -49,6 +61,7 @@ private:
     bool init = false;
     Player *fox;
     std::vector<Mob *> mob;
+    int dir = 2;
     int64_t mob_move = 500;
     int64_t shoot_time = 2000;
     std::chrono::high_resolution_clock::time_point latest_clock = std::chrono::high_resolution_clock::now();

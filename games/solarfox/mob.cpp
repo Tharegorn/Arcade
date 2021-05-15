@@ -14,3 +14,12 @@ void Mob::set_pos(int x, int y, std::string c)
     pos.push_back(y);
     symbol = c;
 }
+
+void Mob::set_shot_pos(int x, int y, std::string c)
+{
+    shot_pos.clear();
+    shot_pos.push_back(x);
+    shot_pos.push_back(y);
+    shot_symbol = c;
+}
+
