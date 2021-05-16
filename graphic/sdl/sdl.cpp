@@ -13,7 +13,6 @@ sdl::sdl()
         exit(EXIT_FAILURE);
     if (TTF_Init() != 0)
         exit(EXIT_FAILURE);
-    IMG_Init(IMG_INIT_PNG);
     win = SDL_CreateWindow("Arcade - SDL VERSION",
                            SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                            1920, 1080, SDL_WINDOW_SHOWN);
@@ -22,8 +21,7 @@ sdl::sdl()
     if (rend == nullptr)
         exit(EXIT_FAILURE);
     font = TTF_OpenFont("assets/ARCADE.TTF", 50);
-    back = IMG_LoadTexture(rend,
-                           "assets/test.png");
+
 }
 
 sdl::~sdl()
