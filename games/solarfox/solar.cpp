@@ -163,6 +163,10 @@ void solar::mapborder(IGraphicLib *GraphicLib, std::string name)
         GraphicLib->printText(35, 25, "HighScore : " + std::to_string(score));
     else
         GraphicLib->printText(35, 25, "HighScore : " + std::to_string(get_highscore()));
+    GraphicLib->printText(35, 30, "M = Mobs\n");
+    GraphicLib->printText(35, 32, "><^v = Mobs shooting\n");
+    GraphicLib->printText(35, 34, "x = Player\n");
+    GraphicLib->printText(35, 36, "T = Target");
 }
 
 void solar::drawFood(IGraphicLib *GraphicLib, int x, int y)
