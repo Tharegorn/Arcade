@@ -9,12 +9,14 @@
 
 solar::solar()
 {
-    x = 10;
-    y = 10;
+    x = 0;
+    y = 0;
     h = 30;
     w = 30;
     fox = new Player(15, 15, "x");
     shoot = new Player(10, 10, "O");
+    target = new Player(25, 16, "T");
+    target_state = true;
 }
 
 solar::~solar()
@@ -38,7 +40,7 @@ int solar::moove_fox(IGraphicLib *GraphicLib)
 
 int solar::check_fox_moove(IGraphicLib *GrapicLib)
 {
-    if (fox->x >= 30 || fox->x <= 10 || fox->y >= 30 || fox->y <= 10)
+    if (fox->x >= w || fox->x <= x || fox->y >= h || fox->y <= y)
         return 1;
     for (auto &&i : mob)
     {
@@ -65,6 +67,15 @@ void solar::check_move_shot()
             shoot_state = false;
             i->set_shot_state(false);
         }
+    }
+    if (shoot->x == target->x && shoot->y == target->y && target_state == true) {
+        target_state = false;
+        delete(target);
+        score += 10;
+    }
+    if (target_state == false) {
+        target = new Player(rand() % 19, rand() % 19, "T");
+        target_state = true;
     }
 }
 
@@ -123,9 +134,9 @@ void solar::Init(IGraphicLib *GraphicLib)
 {
     for (int i = 0; i != 4; i++)
         mob.push_back(new Mob());
-    mob[0]->set_pos(20, 10, "M");
+    mob[0]->set_pos(20, 0, "M");
     mob[0]->set_move("LEFT");
-    mob[0]->set_shot_pos(20, 10, "v");
+    mob[0]->set_shot_pos(20, 0, "v");
     mob[0]->set_shot_move("DOWN");
     mob[1]->set_pos(30, 25, "M");
     mob[1]->set_move("DOWN");
@@ -135,9 +146,9 @@ void solar::Init(IGraphicLib *GraphicLib)
     mob[2]->set_move("RIGHT");
     mob[2]->set_shot_pos(13, 30, "^");
     mob[2]->set_shot_move("UP");
-    mob[3]->set_pos(10, 22, "M");
+    mob[3]->set_pos(0, 22, "M");
     mob[3]->set_move("UP");
-    mob[3]->set_shot_pos(10, 22, ">");
+    mob[3]->set_shot_pos(0, 22, ">");
     mob[3]->set_shot_move("RIGHT");
     mob[0]->set_shot_state(true);
     mob[1]->set_shot_state(true);
@@ -152,9 +163,9 @@ void solar::moove_mob(IGraphicLib *GraphicLib)
     {
         if (i == 0)
             if (mob[i]->get_move() == "LEFT")
-                mob[i]->set_pos(mob[i]->get_pos()[0] - 1, 10, "M");
+                mob[i]->set_pos(mob[i]->get_pos()[0] - 1, 0, "M");
             else
-                mob[i]->set_pos(mob[i]->get_pos()[0] + 1, 10, "M");
+                mob[i]->set_pos(mob[i]->get_pos()[0] + 1, 0, "M");
         if (i == 1)
             if (mob[i]->get_move() == "DOWN")
                 mob[i]->set_pos(30, mob[i]->get_pos()[1] + 1, "M");
@@ -167,9 +178,9 @@ void solar::moove_mob(IGraphicLib *GraphicLib)
                 mob[i]->set_pos(mob[i]->get_pos()[0] - 1, 30, "M");
         if (i == 3)
             if (mob[i]->get_move() == "DOWN")
-                mob[i]->set_pos(10, mob[i]->get_pos()[1] + 1, "M");
+                mob[i]->set_pos(0, mob[i]->get_pos()[1] + 1, "M");
             else
-                mob[i]->set_pos(10, mob[i]->get_pos()[1] - 1, "M");
+                mob[i]->set_pos(0, mob[i]->get_pos()[1] - 1, "M");
     }
     for (int i = 0; i != 4; i++)
     {
@@ -177,28 +188,28 @@ void solar::moove_mob(IGraphicLib *GraphicLib)
         {
             if ((mob[i]->get_pos()[0] + 1) == 30)
                 mob[i]->set_move("LEFT");
-            if ((mob[i]->get_pos()[0] - 1) == 10)
+            if ((mob[i]->get_pos()[0] - 1) == 0)
                 mob[i]->set_move("RIGHT");
         }
         if (i == 1)
         {
             if ((mob[i]->get_pos()[1] + 1) == 30)
                 mob[i]->set_move("UP");
-            if ((mob[i]->get_pos()[1] - 1) == 10)
+            if ((mob[i]->get_pos()[1] - 1) == 0)
                 mob[i]->set_move("DOWN");
         }
         if (i == 2)
         {
             if ((mob[i]->get_pos()[0] + 1) == 30)
                 mob[i]->set_move("LEFT");
-            if ((mob[i]->get_pos()[0] - 1) == 10)
+            if ((mob[i]->get_pos()[0] - 1) == 0)
                 mob[i]->set_move("RIGHT");
         }
         if (i == 3)
         {
             if ((mob[i]->get_pos()[1] + 1) == 30)
                 mob[i]->set_move("UP");
-            if ((mob[i]->get_pos()[1] - 1) == 10)
+            if ((mob[i]->get_pos()[1] - 1) == 0)
                 mob[i]->set_move("DOWN");
         }
     }
@@ -220,7 +231,7 @@ void solar::moove_mob(IGraphicLib *GraphicLib)
         {
             mob[i]->set_shot_pos(mob[i]->get_shot_pos()[0] + 1, mob[i]->get_shot_pos()[1], ">");
         }
-        if (mob[i]->get_shot_pos()[0] > 30 || mob[i]->get_shot_pos()[0] < 10 || mob[i]->get_shot_pos()[1] > 30 || mob[i]->get_shot_pos()[1] < 10)
+        if (mob[i]->get_shot_pos()[0] > w || mob[i]->get_shot_pos()[0] < x || mob[i]->get_shot_pos()[1] > h || mob[i]->get_shot_pos()[1] < y)
             mob[i]->set_shot_state(false);
     }
 }
@@ -296,6 +307,8 @@ int solar::run(IGraphicLib *GraphicLib, std::string name)
             GraphicLib->printText(i->get_shot_pos()[0], i->get_shot_pos()[1], i->get_shot_symbol().c_str());
         GraphicLib->printText(i->get_pos()[0], i->get_pos()[1], i->get_symbol().c_str());
     }
+    if (target_state == true)
+        GraphicLib->printText(target->x, target->y, target->symbol);
     if (shoot_state == true)
         GraphicLib->printText(shoot->x, shoot->y, shoot->symbol);
     GraphicLib->printText(fox->x, fox->y, fox->symbol);

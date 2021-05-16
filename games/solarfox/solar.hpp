@@ -66,11 +66,13 @@ private:
     bool shoot_state = false;
     int shoot_dir;
     int moove_shot = 0;
+    Player *target;
+    bool target_state;
     std::vector<Mob *> mob;
     int dir = 2;
     int score = 0;
     int64_t mob_move = 700;
-    int64_t shoot_time = 500;
+    int64_t shoot_time = 400;
     std::chrono::high_resolution_clock::time_point latest_clock = std::chrono::high_resolution_clock::now();
     std::chrono::high_resolution_clock::time_point shooter = std::chrono::high_resolution_clock::now();
 };
