@@ -23,6 +23,17 @@ solar::~solar()
 {
 }
 
+void solar::highscore(std::string name)
+{
+    std::fstream my_file;
+
+    if (name == "")
+        name = "No_name";
+    my_file.open("./assets/solar_score.txt", std::ios::app);
+    my_file << name + " " + std::to_string(score) + "\n";
+    my_file.close();
+}
+
 int solar::moove_fox(IGraphicLib *GraphicLib)
 {
     if (dir == 1)
@@ -248,8 +259,10 @@ int solar::run(IGraphicLib *GraphicLib, std::string name)
     if (mob_move <= delta)
     {
         moove_mob(GraphicLib);
-        if (moove_fox(GraphicLib) == 1)
+        if (moove_fox(GraphicLib) == 1) {
+            highscore(name);
             return -84;
+        }
         for (int i = 0; i != 4; i++)
         {
             if (mob[i]->get_shot_state() == false)

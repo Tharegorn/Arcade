@@ -135,6 +135,7 @@ void nibler::highscore(std::string name)
     my_file << name + " " + std::to_string(score) + "\n";
     my_file.close();
 }
+
 int nibler::run(IGraphicLib *GraphicLib, std::string name)
 {
     std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
