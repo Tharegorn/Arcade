@@ -23,6 +23,12 @@ solar::~solar()
 {
 }
 
+void solar::delete_all()
+{
+    delete(shoot);
+    delete(fox);
+    delete(target);
+}
 void solar::move_player_shoot()
 {
     moove_shot += 1;
@@ -365,6 +371,7 @@ int solar::run(IGraphicLib *GraphicLib, std::string name)
         move_shoot();
         if (moove_fox(GraphicLib) == 1) {
             highscore(name);
+            delete_all();
             return -84;
         }
         this->latest_clock = now;

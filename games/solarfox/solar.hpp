@@ -59,6 +59,7 @@ public:
     void display(IGraphicLib *GraphicLib, std::string name);
     void highscore(std::string name);
     int get_highscore();
+    void delete_all();
 
 private:
     int x;
