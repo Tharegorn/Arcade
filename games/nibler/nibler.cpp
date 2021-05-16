@@ -29,6 +29,32 @@ void nibler::drawSnake(IGraphicLib *GraphicLib)
 }
 
 
+int nibler::get_highscore()
+{
+    std::ifstream file;
+    std::string line;
+    std::string stk;
+    int ctt = 0;
+    int tmp = 0;
+    file.open("./assets/nibler_score.txt");
+    while (getline(file, line))
+    {
+        for (int i = 0; line[i]; i++)
+        {
+            if (line[i - 1] == ' ')
+                ctt = 1;
+            if (ctt == 1)
+                stk.push_back(line[i]);
+        }
+        if (tmp < std::stoi(stk))
+            tmp = std::stoi(stk);
+        stk.clear();
+        ctt = 0;
+    }
+    file.close();
+    return (tmp);
+}
+
 void nibler::set_input(int a)
 {
     dir = a;
@@ -122,6 +148,7 @@ void nibler::draw_game(IGraphicLib *GraphicLib, std::string name)
     drawSnake(GraphicLib);
     GraphicLib->printText(40, 10, "Score : " + std::to_string(score));
     GraphicLib->printText(40, 15, "Name : " + name);
+    GraphicLib->printText(40, 20, "HighScore : " + std::to_string(get_highscore()));
     drawFood(GraphicLib, pfood->x, pfood->y);
 }
 

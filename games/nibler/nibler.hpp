@@ -25,6 +25,7 @@ public:
     void set_input(int a);
     void draw_game(IGraphicLib *GraphicLib, std::string name);
     void highscore(std::string name);
+    int get_highscore();
     void init(IGraphicLib *GraphicLib);
     char libType() { return ('G');}
 

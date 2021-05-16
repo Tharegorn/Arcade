@@ -54,7 +54,11 @@ public:
     void init_shoot();
     int check_fox_moove(IGraphicLib *GraphicLib);
     void check_move_shot();
+    void move_shoot();
+    void move_player_shoot();
+    void display(IGraphicLib *GraphicLib, std::string name);
     void highscore(std::string name);
+    int get_highscore();
 
 private:
     int x;
