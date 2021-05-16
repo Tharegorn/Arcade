@@ -64,16 +64,16 @@ class libcaca: IGraphicLib {
 };</code>
 
 Let's review each function : 
-<code>int getkey()</code> Is the function that must return the entire **keyboard input** in **int**.
-<code>void clearwin()</code> This function is used to **erase all** the content on the window.
-<code>void printText(int x, it y, std::string text)</code> This function **displays** the content of the variable **text** at the **x** and **y** positions given in parameters.
-<code>void refresh()</code>This function **updates** the **entire** window.
+<code>int getkey()</code> Is the function that must return the entire **keyboard input** in **int**.</br>
+<code>void clearwin()</code> This function is used to **erase all** the content on the window.</br>
+<code>void printText(int x, it y, std::string text)</code> This function **displays** the content of the variable **text** at the **x** and **y** positions given in parameters.</br>
+<code>void refresh()</code>This function **updates** the **entire** window.</br>
 <code>void printbox(int x, int x, int h, int w)</code>
 This function allows to display a box at **x** and **y** positions with also a variable **height** and **width** thanks to the parameters **h** for **height** and **w** for **width**
-This function updates the entire window.
-<code>char libType()</code>This function will return **L** because it's a graphical Library.
+<code>void refresh()</code>This function updates the entire window.</br>
+<code>char libType()</code>This function will return **L** because it's a graphical Library.</br>
 <code><void drawMenu(std::vector<std::string> libraries, std::vector<std::string> games, int curr, int act, std::string name)></code>This function is used to display the menu, it takes as parameters a **std::string** vector containing the name of all **graphic libraries** and a **std::string** vector containing the name of all games.
-This function also takes as parameters an **int curr** of the value of the currently loaded **graphic library**, an **int act** of the currently loaded **game library** and a **std::string name** containing the **pseudo** of the user.
+This function also takes as parameters an **int curr** of the value of the currently loaded **graphic library**, an **int act** of the currently loaded **game library** and a **std::string name** containing the **pseudo** of the user.</br>
 
 
 You must initialize all all you'r library (window, fonts, pics) in the contructor of the library, and destroy them in the destructor.
@@ -109,8 +109,8 @@ You need to respect this Interface :
 </code>
 Remember to include IGames.hpp !
 
-There is a Player class which allows you to manage your player easily, it contains only an x and y position and a std::string symbol containing the symbol of the player.
-For ascii games this allows to manage easily the player
-It simply allows you to create a player variable and give it attributes:
-<code>Player player(10, 10, "P");</code>
+There is a Player class which allows you to manage your player easily, it contains only an x and y position and a std::string symbol containing the symbol of the player.</br>
+For ascii games this allows to manage easily the player.</br>
+It simply allows you to create a player variable and give it attributes:</br>
+<code>Player player(10, 10, "P");</code></br>
 This initialization will create a player at position 10, 10 with symbol P.
