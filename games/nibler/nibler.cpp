@@ -28,7 +28,6 @@ void nibler::drawSnake(IGraphicLib *GraphicLib)
         GraphicLib->printText(i->x, i->y, i->symbol);
 }
 
-
 int nibler::get_highscore()
 {
     std::ifstream file;
@@ -65,24 +64,35 @@ void nibler::getInput(int a)
     int nx = 0;
     int ny = 0;
     dir = a;
-    if (a == 1) {
+    if (a == 1)
+    {
         nx = 0;
         ny = -1;
-    } else if (a == 2) {
+    }
+    else if (a == 2)
+    {
         nx = 0;
         ny = 1;
-    } else if (a == 3) {
+    }
+    else if (a == 3)
+    {
         nx = -1;
         ny = 0;
-    } else if (a == 4) {
+    }
+    else if (a == 4)
+    {
         nx = 1;
         ny = 0;
     }
-    for (int i = snake.size() - 1; i != -1; i--) {
-        if (i == 0) {
+    for (int i = snake.size() - 1; i != -1; i--)
+    {
+        if (i == 0)
+        {
             snake[i]->x += nx;
             snake[i]->y += ny;
-        } else {
+        }
+        else
+        {
             snake[i]->x = snake[i - 1]->x;
             snake[i]->y = snake[i - 1]->y;
         }
@@ -90,7 +100,8 @@ void nibler::getInput(int a)
 }
 int nibler::mooveSnake(IGraphicLib *GraphicLib)
 {
-    if (snake[0]->x == pfood->x && snake[0]->y == pfood->y) {
+    if (snake[0]->x == pfood->x && snake[0]->y == pfood->y)
+    {
         score++;
         if (res - 50 < 250)
             res = 250;
@@ -123,7 +134,8 @@ int nibler::mooveSnake(IGraphicLib *GraphicLib)
 
 void nibler::init(IGraphicLib *GraphicLib)
 {
-    for (int i = 0; i != 4; i++) {
+    for (int i = 0; i != 4; i++)
+    {
         if (i == 0)
         {
             Player *p = new Player((w / 2) - i, (h / 2), "0");
@@ -139,7 +151,8 @@ void nibler::init(IGraphicLib *GraphicLib)
 
 void nibler::draw_game(IGraphicLib *GraphicLib, std::string name)
 {
-    if (food == false) {
+    if (food == false)
+    {
         init(GraphicLib);
         pfood = new Player(rand() % (this->w - 1) + (this->x + 1), rand() % (this->h - 1) + (this->y + 1), "F");
         food = true;
@@ -148,7 +161,10 @@ void nibler::draw_game(IGraphicLib *GraphicLib, std::string name)
     drawSnake(GraphicLib);
     GraphicLib->printText(40, 10, "Score : " + std::to_string(score));
     GraphicLib->printText(40, 15, "Name : " + name);
-    GraphicLib->printText(40, 20, "HighScore : " + std::to_string(get_highscore()));
+    if (score > get_highscore())
+        GraphicLib->printText(40, 20, "HighScore : " + std::to_string(score));
+    else
+        GraphicLib->printText(40, 20, "HighScore : " + std::to_string(get_highscore()));
     drawFood(GraphicLib, pfood->x, pfood->y);
 }
 
@@ -168,14 +184,16 @@ int nibler::run(IGraphicLib *GraphicLib, std::string name)
     std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
     auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(now - this->latest_clock).count();
     draw_game(GraphicLib, name);
-    if (mooveSnake(GraphicLib) == -84) {
+    if (mooveSnake(GraphicLib) == -84)
+    {
         highscore(name);
         free(pfood);
-        for (auto &&i: snake)
+        for (auto &&i : snake)
             free(i);
         return -84;
     }
-    if (res <= delta) {
+    if (res <= delta)
+    {
         this->latest_clock = now;
         getInput(dir);
     }

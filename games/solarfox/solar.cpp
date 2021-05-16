@@ -159,7 +159,10 @@ void solar::mapborder(IGraphicLib *GraphicLib, std::string name)
     GraphicLib->printbox(h, w, x, y);
     GraphicLib->printText(35, 15, "Name : " + name);
     GraphicLib->printText(35, 20, "Score : " + std::to_string(score));
-    GraphicLib->printText(35, 25, "HighScore : " + std::to_string(get_highscore()));
+    if (score > get_highscore())
+        GraphicLib->printText(35, 25, "HighScore : " + std::to_string(score));
+    else
+        GraphicLib->printText(35, 25, "HighScore : " + std::to_string(get_highscore()));
 }
 
 void solar::drawFood(IGraphicLib *GraphicLib, int x, int y)
